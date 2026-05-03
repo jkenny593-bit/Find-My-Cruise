@@ -4,8 +4,8 @@ import CruiseGrid from '@/components/cruise/CruiseGrid';
 
 export const generateMetadata = (): Metadata => {
   return {
-    title: 'Mediterranean Cruises from Ireland | FindMyCruise.ie',
-    description: 'Discover the best Mediterranean cruise deals from Dublin, Cork, and Belfast. Hand-picked itineraries for 2026/2027.',
+    title: 'Cheap Mediterranean Cruise Deals from Ireland | FindMyCruise.ie',
+    description: 'Find the cheapest Mediterranean cruise deals for 2026. Compare prices and itineraries from Dublin and Cork. Budget to luxury options hand-picked by Mara.',
   };
 };
 
@@ -22,13 +22,12 @@ export default function MediterraneanPage() {
       {/* Hero Header */}
       <div className="bg-primary py-20 text-center">
         <div className="max-w-[1200px] mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-heading font-bold text-white mb-4">
-            Mediterranean Cruises from Ireland
+          <h1 className="text-4xl md:text-5xl font-heading font-bold text-white mb-4 leading-tight">
+            Cheap Mediterranean Cruise Deals <br className="hidden md:block" /> for Irish Travellers
           </h1>
-          <p className="text-gray-300 max-w-2xl mx-auto">
-            From the sun-drenched Amalfi Coast to the ancient ruins of Greece, 
-            find your perfect Mediterranean voyage with easy flight connections 
-            from across the Emerald Isle.
+          <p className="text-gray-300 max-w-2xl mx-auto text-lg">
+            Stop searching and start comparing. We uncover the best Mediterranean cruise deals 
+            with easy flight connections from across Ireland.
           </p>
         </div>
       </div>

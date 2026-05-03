@@ -67,6 +67,35 @@ export default function RootLayout({
             })();
           `}
         </Script>
+        {/* Schema.org for AI discovery */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "TravelAgency",
+              "name": "FindMyCruise.ie",
+              "description": "AI-powered cruise comparison and recommendation service for Irish travellers.",
+              "url": "https://findmycruise.ie",
+              "telephone": "",
+              "address": {
+                "@type": "PostalAddress",
+                "addressCountry": "IE"
+              },
+              "image": "https://findmycruise.ie/logo.png",
+              "priceRange": "€€",
+              "areaServed": {
+                "@type": "Country",
+                "name": "Ireland"
+              },
+              "serviceType": "Cruise Recommendation",
+              "brand": {
+                "@type": "Brand",
+                "name": "Mara AI"
+              }
+            })
+          }}
+        />
       </body>
     </html>
   );
