@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { CruiseOption } from '@/lib/widgety';
+import { generateDeepLink } from '@/lib/affiliates/utils';
 
 interface CruiseCardProps {
   cruise: CruiseOption;
@@ -60,7 +61,7 @@ const CruiseCard = ({ cruise }: CruiseCardProps) => {
         </div>
 
         <a
-          href={cruise.affiliateLink}
+          href={generateDeepLink(cruise.affiliateLink)}
           target="_blank"
           rel="nofollow noopener"
           className="w-full bg-primary text-white py-3 rounded-full font-bold text-center hover:bg-primary/90 transition-all text-sm mt-auto"

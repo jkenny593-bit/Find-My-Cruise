@@ -3,6 +3,7 @@ import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import Script from "next/script";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -32,6 +33,16 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <Script id="travelpayouts-tracking" strategy="afterInteractive">
+          {`
+            (function () {
+                var script = document.createElement("script");
+                script.async = 1;
+                script.src = 'https://emrldtp.com/NTI0OTY2.js?t=524966';
+                document.head.appendChild(script);
+            })();
+          `}
+        </Script>
       </body>
     </html>
   );
