@@ -1,109 +1,116 @@
 import Link from 'next/link';
-import Image from 'next/image';
 
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-[80vh] flex items-center justify-center overflow-hidden bg-primary">
-        {/* Abstract Nautical Background Pattern */}
+      <section className="relative h-[85vh] flex items-center justify-center overflow-hidden bg-primary">
+        {/* Modern Geometric Overlay */}
         <div className="absolute inset-0 opacity-10 pointer-events-none">
-          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--color-accent)_1px,_transparent_1px)] bg-[length:40px_40px]" />
+          <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(45deg,_transparent_25%,_rgba(255,255,255,0.1)_50%,_transparent_75%)] bg-[length:100px_100px]" />
         </div>
         
-        <div className="relative z-10 max-w-[1200px] mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-white mb-6 leading-tight">
-            Find Your Perfect Cruise <br className="hidden md:block" />
-            <span className="text-accent italic">Tailored for Ireland</span>
+        <div className="relative z-10 max-w-[1200px] mx-auto px-6 text-center">
+          <span className="text-accent font-bold tracking-[0.3em] uppercase text-xs mb-6 block animate-fade-in">Redefining Cruise Discovery</span>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold text-white mb-8 leading-[1.1] tracking-tight">
+            The Intelligent Way <br className="hidden md:block" />
+            <span className="text-accent italic font-normal">to Find Your Voyage</span>
           </h1>
-          <p className="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Stop scrolling through endless lists. Chat with Mara, our AI specialist, 
-            to discover hand-picked cruises departing from Dublin, Cork, and beyond.
+          <p className="text-lg md:text-xl text-white/70 mb-12 max-w-2xl mx-auto leading-relaxed font-light">
+            Skip the generic search engines. Chat with Mara, our specialized AI, 
+            to uncover hand-picked cruises tailored for your departure from Ireland.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Link 
               href="/find" 
-              className="bg-accent text-primary px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform shadow-lg"
+              className="bg-accent text-primary px-10 py-5 rounded-full font-bold text-lg hover:scale-105 transition-all shadow-2xl shadow-accent/20"
             >
-              Start Chatting with Mara
+              Consult with Mara
             </Link>
             <Link 
-              href="/destinations" 
-              className="bg-white/10 backdrop-blur-sm text-white border border-white/20 px-8 py-4 rounded-full font-bold text-lg hover:bg-white/20 transition-all"
+              href="/blog" 
+              className="bg-white/5 backdrop-blur-md text-white border border-white/10 px-10 py-5 rounded-full font-bold text-lg hover:bg-white/10 transition-all"
             >
-              Explore Destinations
+              Explore the Journal
             </Link>
           </div>
         </div>
       </section>
 
-      {/* How It Works Section */}
-      <section className="py-24 bg-white">
-        <div className="max-w-[1200px] mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary mb-16">
-            How FindMyCruise.ie Works
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            {[
-              {
-                step: "01",
-                title: "Tell Mara Your Plans",
-                desc: "Have a quick chat with Mara. She'll ask about your budget, preferred ports, and travel style."
-              },
-              {
-                step: "02",
-                title: "Compare Top Picks",
-                desc: "Mara scans the Widgety API to find 3 perfect options—budget, mid-range, and premium."
-              },
-              {
-                step: "03",
-                title: "Book with Partners",
-                desc: "Once you find 'the one', we'll send you directly to our trusted partners like Royal Caribbean or Expedia to book."
-              }
-            ].map((item, i) => (
-              <div key={i} className="relative p-8 rounded-xl border border-gray-100 bg-background shadow-sm hover:shadow-lg transition-shadow">
-                <span className="absolute -top-6 left-1/2 -translate-x-1/2 bg-accent text-primary font-bold w-12 h-12 rounded-full flex items-center justify-center border-4 border-white">
-                  {item.step}
-                </span>
-                <h3 className="text-xl font-heading font-bold text-primary mt-4 mb-3">{item.title}</h3>
-                <p className="text-text/70 leading-relaxed">{item.desc}</p>
+      {/* Modern Value Prop */}
+      <section className="py-32 bg-white">
+        <div className="max-w-[1200px] mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <div>
+              <span className="text-accent font-bold tracking-widest uppercase text-xs mb-4 block">The FindMyCruise Advantage</span>
+              <h2 className="text-4xl md:text-5xl font-heading font-bold text-primary mb-8 leading-tight">
+                Personalized Expert Advice, Powered by AI.
+              </h2>
+              <p className="text-text-light text-lg mb-10 leading-relaxed">
+                We've combined decades of travel expertise with cutting-edge AI to solve the biggest frustration in cruising: finding the right ship for the right price, with the right flight connections.
+              </p>
+              <div className="space-y-8">
+                {[
+                  { title: "Smart Matching", desc: "Mara analyzes thousands of itineraries to find the three that best match your style." },
+                  { title: "Irish Centric", desc: "Every recommendation prioritizes ease of travel from Dublin, Cork, Shannon, and Belfast." },
+                  { title: "Transparent & Free", desc: "We are an independent affiliate site. Our advice is free, and we never add hidden fees." }
+                ].map((item, i) => (
+                  <div key={i} className="flex gap-6">
+                    <div className="w-12 h-12 bg-surface rounded-2xl flex-shrink-0 flex items-center justify-center text-accent text-xl font-bold">0{i+1}</div>
+                    <div>
+                      <h4 className="font-bold text-primary text-xl mb-1">{item.title}</h4>
+                      <p className="text-text-light text-sm">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+            <div className="relative aspect-square bg-surface rounded-[3rem] overflow-hidden shadow-inner border border-gray-100 flex items-center justify-center p-16">
+               <div className="text-center">
+                  <div className="w-24 h-24 bg-accent/20 rounded-full mx-auto mb-8 flex items-center justify-center text-4xl">⚓</div>
+                  <p className="text-2xl font-heading font-bold text-primary italic leading-snug">
+                    "Mara saved me hours of research. She knew exactly which ships sailed with easy flights from Cork."
+                  </p>
+                  <p className="mt-8 text-accent font-bold tracking-widest uppercase text-xs">— Verified Review</p>
+               </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Featured Destinations Section */}
-      <section className="py-24 bg-background">
-        <div className="max-w-[1200px] mx-auto px-4">
-          <div className="flex justify-between items-end mb-12">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary mb-2">Popular from Ireland</h2>
-              <p className="text-text/70">Hand-picked destinations for Irish cruise lovers.</p>
+      {/* Featured Destinations (More Minimalist) */}
+      <section className="py-32 bg-surface">
+        <div className="max-w-[1200px] mx-auto px-6">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+            <div className="max-w-xl">
+              <h2 className="text-4xl font-heading font-bold text-primary mb-4">Curated Destinations</h2>
+              <p className="text-text-light">Hand-picked regions that Irish travellers are booking right now.</p>
             </div>
-            <Link href="/destinations" className="text-primary font-bold hover:text-accent transition-colors underline decoration-accent underline-offset-8">
-              View All
+            <Link href="/destinations/mediterranean" className="group flex items-center text-primary font-bold uppercase tracking-widest text-xs">
+              View All Destinations
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+              </svg>
             </Link>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { name: 'Mediterranean', img: '/dest-med.jpg', color: 'bg-blue-600' },
-              { name: 'Caribbean', img: '/dest-caribbean.jpg', color: 'bg-teal-500' },
-              { name: 'Norwegian Fjords', img: '/dest-fjords.jpg', color: 'bg-slate-700' },
-              { name: 'River Cruises', img: '/dest-river.jpg', color: 'bg-emerald-600' }
+              { name: 'Mediterranean', img: 'https://images.unsplash.com/photo-1548574505-5e239809ee19?auto=format&fit=crop&q=80&w=800' },
+              { name: 'Caribbean', img: 'https://images.unsplash.com/photo-1599640842225-85d111c60e6b?auto=format&fit=crop&q=80&w=800' },
+              { name: 'Norwegian Fjords', img: 'https://images.unsplash.com/photo-1516132006923-6cf348e5dee2?auto=format&fit=crop&q=80&w=800' },
+              { name: 'River Cruises', img: 'https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?auto=format&fit=crop&q=80&w=800' }
             ].map((dest, i) => (
               <Link 
                 key={i} 
                 href={`/destinations/${dest.name.toLowerCase().replace(' ', '-')}`}
-                className="group relative h-80 rounded-xl overflow-hidden shadow-lg bg-primary"
+                className="group relative h-96 rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 bg-white"
               >
-                {/* Placeholder Image Overlay */}
-                <div className={`absolute inset-0 ${dest.color} opacity-40 group-hover:scale-110 transition-transform duration-500`} />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary via-transparent to-transparent" />
-                <div className="absolute bottom-6 left-6">
-                  <h3 className="text-xl font-heading font-bold text-white mb-1">{dest.name}</h3>
-                  <span className="text-accent text-sm font-medium">Explore Deals →</span>
+                <img src={dest.img} alt={dest.name} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent opacity-60" />
+                <div className="absolute bottom-8 left-8">
+                  <h3 className="text-2xl font-heading font-bold text-white mb-2">{dest.name}</h3>
+                  <span className="text-accent text-xs font-bold uppercase tracking-widest group-hover:translate-x-2 transition-transform inline-block">Explore →</span>
                 </div>
               </Link>
             ))}
@@ -111,50 +118,22 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Trust Signals Section */}
-      <section className="py-24 bg-primary text-white overflow-hidden">
-        <div className="max-w-[1200px] mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-          <div>
-            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6">Built for the Irish Traveller</h2>
-            <div className="space-y-6">
-              {[
-                { title: "Direct Flight Access", desc: "Mara prioritizes cruises with easy connections from Dublin, Cork, Shannon, and Belfast." },
-                { title: "Independent Advice", desc: "We are an affiliate site, meaning we recommend the best cruises across all lines, not just one." },
-                { title: "No Hidden Fees", desc: "Using Mara is completely free. We earn a small commission from the cruise lines when you book." }
-              ].map((signal, i) => (
-                <div key={i} className="flex gap-4">
-                  <div className="bg-accent h-6 w-6 rounded-full flex-shrink-0 mt-1 flex items-center justify-center text-primary font-bold text-xs">✓</div>
-                  <div>
-                    <h4 className="font-bold text-lg text-accent">{signal.title}</h4>
-                    <p className="text-gray-300">{signal.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="relative aspect-square md:aspect-video rounded-xl overflow-hidden bg-accent/20 flex items-center justify-center p-12 text-center border-2 border-accent/30">
-            <div>
-              <div className="w-20 h-20 bg-accent rounded-full mx-auto mb-6 flex items-center justify-center text-3xl">☘️</div>
-              <h3 className="text-2xl font-heading font-bold mb-2 italic">"Mara saved me hours of research. She knew exactly which ships sailed from Southampton with easy flights from Cork!"</h3>
-              <p className="text-accent font-bold">— Siobhán, County Cork</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Final CTA */}
-      <section className="py-24 bg-white">
-        <div className="max-w-[800px] mx-auto px-4 text-center">
-          <div className="bg-background p-12 rounded-3xl border border-gray-100 shadow-xl">
-            <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary mb-6">Ready to find your voyage?</h2>
-            <p className="text-lg text-text/70 mb-10 leading-relaxed">
-              Don't spend another evening staring at spreadsheets. Tell Mara what you're looking for and let her do the hard work.
+      {/* Final Call to Action */}
+      <section className="py-40 bg-white">
+        <div className="max-w-[900px] mx-auto px-6 text-center">
+          <div className="bg-primary p-20 rounded-[3rem] shadow-2xl relative overflow-hidden">
+            {/* Background Accent */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-accent/10 rounded-full -mr-32 -mt-32 blur-3xl" />
+            
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-8 leading-tight">Ready to Find Your <br/>Perfect Voyage?</h2>
+            <p className="text-white/60 text-lg mb-12 max-w-md mx-auto font-light">
+              Start your conversation with Mara today and get three expert recommendations in minutes.
             </p>
             <Link 
               href="/find" 
-              className="inline-block bg-primary text-white px-10 py-5 rounded-full font-bold text-xl hover:bg-primary/90 transition-all shadow-lg hover:shadow-accent/20"
+              className="inline-block bg-accent text-primary px-12 py-5 rounded-full font-bold text-xl hover:scale-105 transition-all shadow-xl shadow-accent/20"
             >
-              Start Your Free Search
+              Begin Your Search
             </Link>
           </div>
         </div>

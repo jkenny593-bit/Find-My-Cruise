@@ -4,24 +4,22 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-primary text-white pt-16 pb-8 border-t border-accent/20">
-      <div className="max-w-[1200px] mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-12">
+    <footer className="bg-white border-t border-gray-100 pt-24 pb-12">
+      <div className="max-w-[1200px] mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-16">
         {/* Brand Column */}
-        <div className="space-y-4">
-          <Link href="/" className="text-2xl font-heading font-bold text-accent">
-            FindMyCruise.ie
+        <div className="space-y-6">
+          <Link href="/" className="text-2xl font-heading font-bold tracking-tight text-primary">
+            FindMyCruise<span className="text-accent">.ie</span>
           </Link>
-          <p className="text-sm text-gray-300 leading-relaxed">
-            The #1 AI-powered cruise finder for Irish travellers. 
-            Helping you find the perfect voyage from Dublin, Cork, 
-            Shannon, and Belfast.
+          <p className="text-sm text-text-light leading-relaxed font-light">
+            Ireland's specialized AI cruise discovery platform. We simplify the search process for the modern traveller.
           </p>
         </div>
 
         {/* Destinations Column */}
         <div>
-          <h3 className="font-heading font-bold text-lg mb-4 text-accent">Destinations</h3>
-          <ul className="space-y-2 text-sm text-gray-300">
+          <h3 className="text-primary font-bold text-xs uppercase tracking-[0.2em] mb-8">Destinations</h3>
+          <ul className="space-y-4 text-sm text-text-light">
             <li><Link href="/destinations/mediterranean" className="hover:text-accent transition-colors">Mediterranean</Link></li>
             <li><Link href="/destinations/caribbean" className="hover:text-accent transition-colors">Caribbean</Link></li>
             <li><Link href="/destinations/fjords" className="hover:text-accent transition-colors">Norwegian Fjords</Link></li>
@@ -32,33 +30,34 @@ const Footer = () => {
 
         {/* Cruise Lines Column */}
         <div>
-          <h3 className="font-heading font-bold text-lg mb-4 text-accent">Cruise Lines</h3>
-          <ul className="space-y-2 text-sm text-gray-300">
+          <h3 className="text-primary font-bold text-xs uppercase tracking-[0.2em] mb-8">Cruise Lines</h3>
+          <ul className="space-y-4 text-sm text-text-light">
             <li><Link href="/cruise-lines/royal-caribbean" className="hover:text-accent transition-colors">Royal Caribbean</Link></li>
             <li><Link href="/cruise-lines/pando" className="hover:text-accent transition-colors">P&O Cruises</Link></li>
             <li><Link href="/cruise-lines/msc" className="hover:text-accent transition-colors">MSC Cruises</Link></li>
           </ul>
         </div>
 
-        {/* Support Column */}
+        {/* Connect Column */}
         <div>
-          <h3 className="font-heading font-bold text-lg mb-4 text-accent">FindMyCruise</h3>
-          <ul className="space-y-2 text-sm text-gray-300">
-            <li><Link href="/about" className="hover:text-accent transition-colors">About Us</Link></li>
-            <li><Link href="/blog" className="hover:text-accent transition-colors">Cruise Blog</Link></li>
-            <li><Link href="/contact" className="hover:text-accent transition-colors">Contact</Link></li>
-            <li><Link href="/privacy" className="hover:text-accent transition-colors">Privacy Policy</Link></li>
+          <h3 className="text-primary font-bold text-xs uppercase tracking-[0.2em] mb-8">Navigation</h3>
+          <ul className="space-y-4 text-sm text-text-light">
+            <li><Link href="/blog" className="hover:text-accent transition-colors">The Journal</Link></li>
+            <li><Link href="/about" className="hover:text-accent transition-colors">About Our Story</Link></li>
+            <li><Link href="/contact" className="hover:text-accent transition-colors">Get in Touch</Link></li>
+            <li><Link href="/privacy" className="hover:text-accent transition-colors">Privacy & Terms</Link></li>
           </ul>
         </div>
       </div>
 
-      <div className="max-w-[1200px] mx-auto px-4 mt-16 pt-8 border-t border-gray-800 text-center text-xs text-gray-400">
-        <p className="mb-4">
-          © {currentYear} FindMyCruise.ie. All rights reserved. 
-          FindMyCruise.ie is an affiliate recommendation site. We may earn a commission 
-          when you book through our links at no extra cost to you.
+      <div className="max-w-[1200px] mx-auto px-6 mt-24 pt-12 border-t border-gray-50 flex flex-col md:flex-row justify-between items-center gap-8">
+        <p className="text-[10px] text-text-light uppercase tracking-widest leading-loose max-w-xl text-center md:text-left">
+          © {currentYear} FindMyCruise.ie. Independent affiliate recommendation site. We may earn a commission when you book through our links at no additional cost to you.
         </p>
-        <p>Built for Irish Travellers 🇮🇪</p>
+        <div className="flex items-center gap-2 text-xs font-bold text-primary">
+          <span className="w-1.5 h-1.5 bg-accent rounded-full animate-pulse" />
+          Live in Ireland 🇮🇪
+        </div>
       </div>
     </footer>
   );
