@@ -21,7 +21,7 @@ export default function RiverPage() {
     <div className="bg-background min-h-screen">
       {/* Hero Section */}
       <section className="relative h-[60vh] flex items-center justify-center overflow-hidden bg-primary text-white">
-        <div className="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?auto=format&fit=crop&q=80&w=1200')] bg-cover bg-center" />
+        <div className="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1629161750599-28cc6397f02d?auto=format&fit=crop&q=80&w=1200')] bg-cover bg-center" />
         <div className="relative z-10 max-w-[1200px] mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-6xl font-heading font-bold mb-6">
             European River Cruise Holidays from Ireland

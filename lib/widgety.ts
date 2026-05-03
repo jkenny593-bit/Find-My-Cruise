@@ -146,7 +146,7 @@ export const MOCK_CRUISES: CruiseOption[] = [
     highlights: ['Al fresco Aquavit Terrace', 'All-inclusive shore excursions', 'Cultural Curriculum®'],
     affiliateLink: 'https://www.vikingrivercruises.com/?utm_source=findmycruise',
     category: 'Premium',
-    imageUrl: 'https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?auto=format&fit=crop&q=80&w=800',
+    imageUrl: 'https://images.unsplash.com/photo-1629161750599-28cc6397f02d?auto=format&fit=crop&q=80&w=800',
   }
 ];
 

@@ -99,7 +99,7 @@ export default function Home() {
               { name: 'Mediterranean', img: 'https://images.unsplash.com/photo-1548574505-5e239809ee19?auto=format&fit=crop&q=80&w=800' },
               { name: 'Caribbean', img: 'https://images.unsplash.com/photo-1599640842225-85d111c60e6b?auto=format&fit=crop&q=80&w=800' },
               { name: 'Norwegian Fjords', img: 'https://images.unsplash.com/photo-1516132006923-6cf348e5dee2?auto=format&fit=crop&q=80&w=800' },
-              { name: 'River Cruises', img: 'https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?auto=format&fit=crop&q=80&w=800' }
+              { name: 'River Cruises', img: 'https://images.unsplash.com/photo-1629161750599-28cc6397f02d?auto=format&fit=crop&q=80&w=1200' }
             ].map((dest, i) => (
               <Link 
                 key={i} 
