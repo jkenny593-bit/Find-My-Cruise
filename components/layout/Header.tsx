@@ -44,7 +44,9 @@ const Header = () => {
             <div className="absolute top-full left-0 bg-white text-primary min-w-[220px] shadow-2xl rounded-b-2xl overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-100">
               <Link href="/cruise-lines/royal-caribbean" className="block px-8 py-4 hover:bg-surface transition-colors border-b border-gray-50">Royal Caribbean</Link>
               <Link href="/cruise-lines/pando" className="block px-8 py-4 hover:bg-surface transition-colors border-b border-gray-50">P&O Cruises</Link>
-              <Link href="/cruise-lines/msc" className="block px-8 py-4 hover:bg-surface transition-colors">MSC Cruises</Link>
+              <Link href="/cruise-lines/msc" className="block px-8 py-4 hover:bg-surface transition-colors border-b border-gray-50">MSC Cruises</Link>
+              <Link href="/cruise-lines/celebrity" className="block px-8 py-4 hover:bg-surface transition-colors border-b border-gray-50">Celebrity Cruises</Link>
+              <Link href="/cruise-lines/princess" className="block px-8 py-4 hover:bg-surface transition-colors">Princess Cruises</Link>
             </div>
           </div>
 
@@ -95,6 +97,8 @@ const Header = () => {
               <Link href="/cruise-lines/royal-caribbean" onClick={() => setIsMenuOpen(false)} className="hover:text-accent text-primary">Royal Caribbean</Link>
               <Link href="/cruise-lines/pando" onClick={() => setIsMenuOpen(false)} className="hover:text-accent text-primary">P&O Cruises</Link>
               <Link href="/cruise-lines/msc" onClick={() => setIsMenuOpen(false)} className="hover:text-accent text-primary">MSC Cruises</Link>
+              <Link href="/cruise-lines/celebrity" onClick={() => setIsMenuOpen(false)} className="hover:text-accent text-primary">Celebrity Cruises</Link>
+              <Link href="/cruise-lines/princess" onClick={() => setIsMenuOpen(false)} className="hover:text-accent text-primary">Princess Cruises</Link>
             </div>
           </div>
           <div className="border-t border-gray-50 pt-8 flex flex-col space-y-6">
