@@ -16,8 +16,32 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "FindMyCruise.ie | AI Cruise Finder for Irish Travellers",
+  metadataBase: new URL('https://findmycruise.ie'),
+  title: {
+    default: "FindMyCruise.ie | AI Cruise Finder for Irish Travellers",
+    template: "%s | FindMyCruise.ie"
+  },
   description: "Find your perfect cruise holiday with Mara, our Irish-focused AI cruise specialist. Personalized recommendations from Dublin, Cork, Shannon, and Belfast.",
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: "FindMyCruise.ie | AI Cruise Finder for Irish Travellers",
+    description: "Personalized cruise recommendations from Dublin, Cork, Shannon, and Belfast with our AI assistant Mara.",
+    url: 'https://findmycruise.ie',
+    siteName: 'FindMyCruise.ie',
+    locale: 'en_IE',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "FindMyCruise.ie | AI Cruise Finder for Irish Travellers",
+    description: "Find your perfect cruise holiday with our Irish AI assistant Mara.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  }
 };
 
 export default function RootLayout({

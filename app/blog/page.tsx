@@ -10,24 +10,24 @@ export const generateMetadata = (): Metadata => {
 
 const MOCK_POSTS = [
   {
-    slug: 'top-5-cruises-from-dublin-2026',
-    title: 'Top 5 Cruises Departing from Dublin in 2026',
-    excerpt: 'Discover the most convenient cruises for 2026 that let you skip the airport and board right in Dublin Port.',
+    slug: 'premium-vs-budget-cruises-guide',
+    title: 'Premium vs. Budget: Finding the Best Value for Your Irish Holiday',
+    excerpt: 'Is the extra cost of a luxury cruise worth it? We compare the inclusions, dining, and cabins of the top lines.',
+    date: 'May 12, 2026',
+    category: 'Comparison',
+  },
+  {
+    slug: 'best-family-cruise-lines-ireland',
+    title: 'Top 3 Family-Friendly Cruise Lines for Irish Parents',
+    excerpt: 'From waterparks to kids clubs, we break down which lines offer the best experience for your children.',
+    date: 'May 11, 2026',
+    category: 'Comparison',
+  },
+  {
+    slug: 'adventure-vs-relaxation-cruising',
+    title: 'Adventure or Relaxation? Choosing Your Cruise Style',
+    excerpt: 'Do you want to hike glaciers in Norway or lounge on a beach in Barbados? Find your cruise personality.',
     date: 'May 10, 2026',
-    category: 'Guides',
-  },
-  {
-    slug: 'packing-for-a-fjords-cruise-irish-guide',
-    title: 'Packing for a Norwegian Fjords Cruise: An Irish Guide',
-    excerpt: 'Don\'t let the weather catch you out! Here is exactly what you need to pack for a spectacular Fjord adventure.',
-    date: 'May 5, 2026',
-    category: 'Tips',
-  },
-  {
-    slug: 'first-time-cruiser-mistakes-to-avoid',
-    title: '7 Mistakes First-Time Irish Cruisers Make (And How to Avoid Them)',
-    excerpt: 'Heading on your first voyage? Make sure you read these tips before you step on board.',
-    date: 'April 28, 2026',
     category: 'Advice',
   }
 ];
