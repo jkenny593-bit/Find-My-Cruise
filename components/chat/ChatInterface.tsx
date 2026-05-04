@@ -11,7 +11,7 @@ const ChatInterface = () => {
     {
       id: '1',
       role: 'assistant',
-      content: "Dia dhuit! I'm Mara, your Irish cruise specialist. I'd love to help you find your dream voyage. To get us started, could you tell me a bit about what kind of holiday you're looking for, and how many people will be in your party?",
+      content: "Dia dhuit! I'm Mara, your Irish cruise specialist. I'd love to help you find your dream voyage. To get started, tell me a bit about your ideal holiday—like where you'd love to go, when you're thinking of travelling, and who's coming along!",
       timestamp: new Date(),
     },
   ]);
