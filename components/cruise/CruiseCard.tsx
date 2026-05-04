@@ -1,12 +1,22 @@
 import Image from 'next/image';
 import { CruiseOption } from '@/lib/widgety';
 import { generateDeepLink } from '@/lib/affiliates/utils';
+import { trackEvent } from '@/components/layout/GoogleAnalytics';
 
 interface CruiseCardProps {
   cruise: CruiseOption;
 }
 
 const CruiseCard = ({ cruise }: CruiseCardProps) => {
+  const handleBookingClick = () => {
+    trackEvent('affiliate_click', {
+      cruise_line: cruise.line,
+      ship: cruise.ship,
+      category: cruise.category,
+      itinerary: cruise.itinerary
+    });
+  };
+
   return (
     <div className="bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-xl transition-shadow flex flex-col h-full">
       {/* Category Badge */}
@@ -64,6 +74,7 @@ const CruiseCard = ({ cruise }: CruiseCardProps) => {
           href={generateDeepLink(cruise.affiliateLink)}
           target="_blank"
           rel="nofollow noopener"
+          onClick={handleBookingClick}
           className="w-full bg-primary text-white py-3 rounded-full font-bold text-center hover:bg-primary/90 transition-all text-sm mt-auto"
         >
           View Full Itinerary & Book

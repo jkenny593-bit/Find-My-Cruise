@@ -3,6 +3,7 @@ import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import GoogleAnalytics from "@/components/layout/GoogleAnalytics";
 import Script from "next/script";
 
 const inter = Inter({
@@ -52,6 +53,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable} antialiased`}>
       <body className="bg-background text-text min-h-screen flex flex-col">
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || ""} />
         <Header />
         <main className="flex-grow">
           {children}

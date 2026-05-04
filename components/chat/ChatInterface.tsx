@@ -5,6 +5,7 @@ import { Message } from '@/lib/chat-types';
 import ChatMessage from './ChatMessage';
 import ChatInput from './ChatInput';
 import { getRecommendedCruises, CruiseOption } from '@/lib/widgety';
+import { trackEvent } from '@/components/layout/GoogleAnalytics';
 
 const ChatInterface = () => {
   const [messages, setMessages] = useState<Message[]>([
@@ -37,6 +38,11 @@ const ChatInterface = () => {
       timestamp: new Date(),
     };
     
+    // Track first message as a "chat_start"
+    if (messages.length === 1) {
+      trackEvent('chat_start', { first_message: content });
+    }
+
     const updatedMessages = [...messages, userMessage];
     setMessages(updatedMessages);
     setIsLoading(true);
@@ -46,6 +52,9 @@ const ChatInterface = () => {
       const shouldShowResults = content.toLowerCase().includes('show me') || updatedMessages.length >= 16;
       
       if (shouldShowResults && !isFinished) {
+        // Track chat completion
+        trackEvent('chat_complete');
+
         // 1. Determine airport
         const airport = extractAirport(updatedMessages);
         setPreferredAirport(airport);
