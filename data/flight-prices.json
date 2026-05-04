@@ -1,0 +1,81 @@
+{
+  "lastUpdated": "2026-05-04T22:04:51.649Z",
+  "month": "2026-06",
+  "prices": {
+    "DUB-BCN": {
+      "min": 86,
+      "max": 112,
+      "currency": "EUR"
+    },
+    "DUB-FCO": {
+      "min": 89,
+      "max": 190,
+      "currency": "EUR"
+    },
+    "DUB-ATH": {
+      "min": 159,
+      "max": 207,
+      "currency": "EUR"
+    },
+    "DUB-LIS": {
+      "min": 110,
+      "max": 143,
+      "currency": "EUR"
+    },
+    "DUB-TFS": {
+      "min": 95,
+      "max": 175,
+      "currency": "EUR"
+    },
+    "DUB-BGO": {
+      "min": 130,
+      "max": 230,
+      "currency": "EUR"
+    },
+    "DUB-LHR": {
+      "min": 49,
+      "max": 120,
+      "currency": "EUR"
+    },
+    "DUB-MIA": {
+      "min": 514,
+      "max": 771,
+      "currency": "EUR"
+    },
+    "DUB-BGI": {
+      "min": 729,
+      "max": 1094,
+      "currency": "EUR"
+    },
+    "DUB-DXB": {
+      "min": 462,
+      "max": 601,
+      "currency": "EUR"
+    },
+    "ORK-BCN": {
+      "min": 106,
+      "max": 138,
+      "currency": "EUR"
+    },
+    "ORK-LHR": {
+      "min": 55,
+      "max": 130,
+      "currency": "EUR"
+    },
+    "SNN-BCN": {
+      "min": 105,
+      "max": 137,
+      "currency": "EUR"
+    },
+    "SNN-LHR": {
+      "min": 60,
+      "max": 140,
+      "currency": "EUR"
+    },
+    "SNN-MIA": {
+      "min": 692,
+      "max": 1038,
+      "currency": "EUR"
+    }
+  }
+}

@@ -11,20 +11,23 @@ const ChatInterface = () => {
     {
       id: '1',
       role: 'assistant',
-      content: "Dia dhuit! I'm Mara, your Irish cruise specialist. Brilliant to meet you! I'd love to help you find the perfect voyage. To get started, how many people will be travelling in your party?",
+      content: "Dia dhuit! I'm Mara, your Irish cruise specialist. Brilliant to meet you! I'd love to help you find your dream voyage. To get us started, could you tell me a bit about what kind of holiday you're looking for, and how many people will be in your party?",
       timestamp: new Date(),
     },
   ]);
+  const [preferredAirport, setPreferredAirport] = useState<string>('DUB');
   const [isLoading, setIsLoading] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // Auto-scroll to bottom
-  useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-    }
-  }, [messages, isLoading]);
+  // Helper to extract airport from messages
+  const extractAirport = (msgs: Message[]) => {
+    // Look for common Irish airport names or codes
+    const text = msgs.map(m => m.content).join(' ').toLowerCase();
+    if (text.includes('cork') || text.includes('ork')) return 'ORK';
+    if (text.includes('shannon') || text.includes('snn')) return 'SNN';
+    return 'DUB'; // Default to Dublin
+  };
 
   const handleSendMessage = async (content: string) => {
     const userMessage: Message = {
@@ -39,13 +42,36 @@ const ChatInterface = () => {
     setIsLoading(true);
 
     try {
-      // Logic to trigger results if user asks or if we reach 8 messages
-      if (content.toLowerCase().includes('show me') || updatedMessages.length >= 10) {
+      // Logic to trigger results if user asks or if we reach 8 messages (16 messages total including Mara's)
+      const shouldShowResults = content.toLowerCase().includes('show me') || updatedMessages.length >= 16;
+      
+      if (shouldShowResults && !isFinished) {
+        // 1. Determine airport
+        const airport = extractAirport(updatedMessages);
+        setPreferredAirport(airport);
+
+        // 2. Get recommendations
         const results = await getRecommendedCruises({});
+
+        // 3. Get flight prices for each recommendation
+        // We'll pass this info to the AI to generate the final text
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ 
+            messages: updatedMessages,
+            recommendations: results,
+            preferredAirport: airport
+          }),
+        });
+
+        const data = await response.json();
+        if (data.error) throw new Error(data.error);
+
         const maraMessage: Message = {
           id: (Date.now() + 1).toString(),
           role: 'assistant',
-          content: "Brilliant! Based on what you've told me, I've found three fantastic options that would suit you down to the ground. Have a look at these:",
+          content: data.text,
           recommendations: results,
           timestamp: new Date(),
         };
