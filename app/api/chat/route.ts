@@ -5,7 +5,7 @@ import { CRUISE_PORT_MAP } from "@/lib/flights/ports";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
 const model = genAI.getGenerativeModel({ 
-  model: "gemini-1.5-flash",
+  model: "gemini-flash-latest",
   systemInstruction: SYSTEM_PROMPT 
 });
 
@@ -76,6 +76,6 @@ export async function POST(req: Request) {
     return Response.json({ text });
   } catch (error: any) {
     console.error('Chat API Error:', error);
-    return Response.json({ error: error.message || "Mara is having a quick tea break." }, { status: 500 });
+    return Response.json({ error: "Mara is having a quick tea break. Try again in a second!" }, { status: 500 });
   }
 }
