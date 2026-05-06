@@ -30,11 +30,10 @@ const ChatInterface = () => {
 
   // Helper to extract airport from messages
   const extractAirport = (msgs: Message[]) => {
-    // Look for common Irish airport names or codes
     const text = msgs.map(m => m.content).join(' ').toLowerCase();
     if (text.includes('cork') || text.includes('ork')) return 'ORK';
     if (text.includes('shannon') || text.includes('snn')) return 'SNN';
-    return 'DUB'; // Default to Dublin
+    return 'DUB';
   };
 
   // Helper to extract region from messages
@@ -58,7 +57,6 @@ const ChatInterface = () => {
       timestamp: new Date(),
     };
     
-    // Track first message as a "chat_start"
     if (messages.length === 1) {
       trackEvent('chat_start', { first_message: content });
     }
@@ -68,24 +66,34 @@ const ChatInterface = () => {
     setIsLoading(true);
 
     try {
-      // Logic to trigger results if user asks or if we reach 8 messages (16 messages total including Mara's)
-      const shouldShowResults = content.toLowerCase().includes('show me') || updatedMessages.length >= 16;
-      
-      if (shouldShowResults && !isFinished) {
-        // Track chat completion
-        trackEvent('chat_complete');
+      // THE NEW LOGIC: Mara decides when to show results
+      // We'll call the API first to see her natural response
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: updatedMessages }),
+      });
 
-        // 1. Determine preferences
+      const data = await response.json();
+      if (data.error) throw new Error(data.error);
+
+      // If Mara says she's "searching" or "found options", we trigger the results
+      const text = data.text.toLowerCase();
+      const shouldTriggerResults = text.includes('searching') || 
+                                  text.includes('best options') || 
+                                  text.includes('found three') ||
+                                  content.toLowerCase().includes('show me');
+
+      if (shouldTriggerResults && !isFinished) {
+        trackEvent('chat_complete');
         const airport = extractAirport(updatedMessages);
         const region = extractRegion(updatedMessages);
         setPreferredAirport(airport);
 
-        // 2. Get recommendations
         const results = await getRecommendedCruises({ region });
 
-        // 3. Get flight prices for each recommendation
-        // We'll pass this info to the AI to generate the final text
-        const response = await fetch('/api/chat', {
+        // Call API again with recommendations to get the final "Total Cost" response
+        const finalResponse = await fetch('/api/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ 
@@ -95,35 +103,24 @@ const ChatInterface = () => {
           }),
         });
 
-        const data = await response.json();
-        if (data.error) throw new Error(data.error);
-
+        const finalData = await finalResponse.json();
+        
         const maraMessage: Message = {
           id: (Date.now() + 1).toString(),
           role: 'assistant',
-          content: data.text,
+          content: finalData.text,
           recommendations: results,
           timestamp: new Date(),
         };
         setMessages(prev => [...prev, maraMessage]);
         setIsFinished(true);
       } else {
-        const response = await fetch('/api/chat', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ messages: updatedMessages }),
-        });
-
-        const data = await response.json();
-        if (data.error) throw new Error(data.error);
-
         const maraMessage: Message = {
           id: (Date.now() + 1).toString(),
           role: 'assistant',
           content: data.text,
           timestamp: new Date(),
         };
-        
         setMessages(prev => [...prev, maraMessage]);
       }
     } catch (error) {
@@ -131,7 +128,7 @@ const ChatInterface = () => {
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: "I'm sorry, I'm having a bit of trouble connecting. Could you try that again? (Or just type 'Show me cruises' if you're ready to see results!)",
+        content: "I'm sorry, I'm having a bit of trouble connecting. Could you try that again?",
         timestamp: new Date(),
       };
       setMessages(prev => [...prev, errorMessage]);
@@ -142,11 +139,7 @@ const ChatInterface = () => {
 
   return (
     <div className="flex flex-col h-[calc(100vh-80px)] bg-background">
-      {/* Messages Area */}
-      <div 
-        ref={scrollRef}
-        className="flex-grow overflow-y-auto p-4 md:p-8"
-      >
+      <div ref={scrollRef} className="flex-grow overflow-y-auto p-4 md:p-8">
         <div className="max-w-[800px] mx-auto">
           {messages.map((msg) => (
             <ChatMessage key={msg.id} message={msg} />
@@ -162,8 +155,6 @@ const ChatInterface = () => {
           )}
         </div>
       </div>
-
-      {/* Input Area */}
       <ChatInput onSend={handleSendMessage} disabled={isLoading} />
     </div>
   );

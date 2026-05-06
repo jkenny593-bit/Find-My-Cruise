@@ -21,34 +21,27 @@ export async function POST(req: Request) {
       else if (allText.includes('SNN') || allText.includes('SHANNON')) preferredAirport = 'SNN';
     }
 
-    // STEP 2 & 3: Fetch flight prices and build FLIGHT_CONTEXT
-    let flightContext = '';
-    if (recommendations && recommendations.length > 0) {
-      const flightContextLines = recommendations.map((rec: any) => {
-        let cruiseRegion = "Mediterranean";
-        const itinerary = rec.itinerary.toLowerCase();
-        if (itinerary.includes('caribbean')) cruiseRegion = "Caribbean";
-        else if (itinerary.includes('fjord')) cruiseRegion = "Norwegian Fjords";
-        else if (itinerary.includes('greek')) cruiseRegion = "Greek Isles";
-        else if (itinerary.includes('barbados')) cruiseRegion = "Caribbean (Barbados)";
-        else if (itinerary.includes('canary')) cruiseRegion = "Canary Islands";
-        else if (itinerary.includes('iberian')) cruiseRegion = "Iberian Peninsula";
-        else if (itinerary.includes('dubai')) cruiseRegion = "Dubai / Middle East";
-
-        const price = getFlightPrice(preferredAirport, cruiseRegion);
-        if (price) {
-          return `${rec.category} option flights: €${price.min}–€${price.max} return from ${preferredAirport}`;
-        }
-        return null;
-      }).filter(Boolean);
-
-      if (flightContextLines.length > 0) {
-        flightContext = `\n\nFLIGHT_CONTEXT:\n${flightContextLines.join('\n')}\n\nINSTRUCTION: You have been given FLIGHT_CONTEXT showing indicative return flight prices from the user's preferred Irish airport. For each cruise recommendation, add a 'Total Estimated Cost' line: cruise price per person + flight range per person. End with: 'Flight prices are indicative based on recent searches. Always check live fares before booking.'`;
+    // STEP 2: Always build FLIGHT_CONTEXT for the AI to have "early" access to prices
+    // We'll generate a comprehensive context block of all 15 routes for the current origin
+    const regions = Object.keys(CRUISE_PORT_MAP);
+    const flightContextLines = regions.map(region => {
+      const price = getFlightPrice(preferredAirport, region);
+      if (price) {
+        return `${region} flights: €${price.min}–€${price.max} return from ${preferredAirport}`;
       }
+      return null;
+    }).filter(Boolean);
+
+    let flightContext = `\n\nFLIGHT_CONTEXT:\n${flightContextLines.join('\n')}\n\n`;
+
+    // If we have final recommendations, add the specific instructions for the end-game
+    if (recommendations && recommendations.length > 0) {
+      flightContext += `INSTRUCTION: You have been given FLIGHT_CONTEXT showing indicative return flight prices. For each of the 3 cruise recommendations (Budget, Mid-range, Premium), add a 'Total Estimated Cost' line: cruise price per person + flight range per person. End with: 'Flight prices are indicative based on recent searches. Always check live fares before booking.'`;
+    } else {
+      flightContext += `INSTRUCTION: Use the FLIGHT_CONTEXT above to provide travel tips and indicative costs during the conversation. If the user mentions a destination, tell them the flight range from ${preferredAirport} immediately.`;
     }
 
     // Format history for Gemini
-    // Ensure roles alternate and skip initial assistant message
     let historyToFormat = messages.slice(0, -1);
     if (historyToFormat.length > 0 && historyToFormat[0].role === 'assistant') {
       historyToFormat = historyToFormat.slice(1);
@@ -59,8 +52,8 @@ export async function POST(req: Request) {
       parts: [{ text: m.content }],
     }));
 
-    // Add the latest message
-    const latestMessage = messages[messages.length - 1].content + (flightContext ? flightContext : '');
+    // Add the latest message with the dynamic context
+    const latestMessage = messages[messages.length - 1].content + flightContext;
     contents.push({
       role: 'user',
       parts: [{ text: latestMessage }]
