@@ -21,6 +21,13 @@ const ChatInterface = () => {
   const [isFinished, setIsFinished] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
+  // Auto-scroll to bottom
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [messages, isLoading]);
+
   // Helper to extract airport from messages
   const extractAirport = (msgs: Message[]) => {
     // Look for common Irish airport names or codes
@@ -28,6 +35,19 @@ const ChatInterface = () => {
     if (text.includes('cork') || text.includes('ork')) return 'ORK';
     if (text.includes('shannon') || text.includes('snn')) return 'SNN';
     return 'DUB'; // Default to Dublin
+  };
+
+  // Helper to extract region from messages
+  const extractRegion = (msgs: Message[]) => {
+    const text = msgs.map(m => m.content).join(' ').toLowerCase();
+    if (text.includes('mediterranean') || text.includes('med')) return 'Mediterranean';
+    if (text.includes('caribbean')) return 'Caribbean';
+    if (text.includes('fjord') || text.includes('norway')) return 'Norwegian Fjords';
+    if (text.includes('river')) return 'River';
+    if (text.includes('greek') || text.includes('greece')) return 'Greek Isles';
+    if (text.includes('canary') || text.includes('tenerife')) return 'Canary Islands';
+    if (text.includes('dubai') || text.includes('emirates')) return 'Dubai';
+    return undefined;
   };
 
   const handleSendMessage = async (content: string) => {
@@ -55,12 +75,13 @@ const ChatInterface = () => {
         // Track chat completion
         trackEvent('chat_complete');
 
-        // 1. Determine airport
+        // 1. Determine preferences
         const airport = extractAirport(updatedMessages);
+        const region = extractRegion(updatedMessages);
         setPreferredAirport(airport);
 
         // 2. Get recommendations
-        const results = await getRecommendedCruises({});
+        const results = await getRecommendedCruises({ region });
 
         // 3. Get flight prices for each recommendation
         // We'll pass this info to the AI to generate the final text
