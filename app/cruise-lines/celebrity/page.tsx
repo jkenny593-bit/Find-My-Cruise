@@ -73,13 +73,19 @@ export default function CelebrityPage() {
               private restaurant, and an exclusive lounge and sundeck that rivals 
               the world’s most high-end hotels.
             </p>
-            <div className="pt-6">
+            <div className="pt-6 flex flex-wrap gap-4">
               <a 
                 href="/find" 
                 className="inline-block bg-accent text-primary px-10 py-4 rounded-full font-bold hover:scale-105 transition-all shadow-xl shadow-accent/20"
               >
                 Let Mara find your Celebrity Suite
               </a>
+              <Link 
+                href="/cruise-lines/celebrity/fleet" 
+                className="inline-block border border-accent text-accent px-10 py-4 rounded-full font-bold hover:bg-accent/5 transition-all"
+              >
+                Explore the Full Fleet
+              </Link>
             </div>
           </div>
           <div className="lg:w-1/2 bg-white/5 flex items-center justify-center p-20 relative">
