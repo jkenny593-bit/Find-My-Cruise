@@ -73,13 +73,19 @@ export default function PrincessPage() {
               themselves in local culture. Whether it's the glaciers of Alaska or the 
               historic ports of the Mediterranean, Princess gets you closer.
             </p>
-            <div className="pt-6">
+            <div className="pt-6 flex flex-wrap gap-4">
               <a 
                 href="/find" 
                 className="inline-block bg-primary text-white px-10 py-4 rounded-full font-bold hover:bg-opacity-90 transition-all shadow-xl shadow-primary/10"
               >
-                Let Mara find your Princess Voyage
+                Let Mara find your Voyage
               </a>
+              <Link 
+                href="/cruise-lines/princess/fleet" 
+                className="inline-block border border-primary text-primary px-10 py-4 rounded-full font-bold hover:bg-primary/5 transition-all"
+              >
+                View the Princess Fleet
+              </Link>
             </div>
           </div>
           <div className="lg:w-1/2 bg-white flex items-center justify-center p-20 relative">
