@@ -7,6 +7,9 @@ export const generateMetadata = (): Metadata => {
   return {
     title: 'Caribbean Cruise Holidays from Ireland | FindMyCruise.ie',
     description: 'Find your perfect Caribbean cruise from Ireland. Expert advice on cruises from Dublin and Cork to Barbados, St Lucia, Antigua, and more.',
+    alternates: {
+      canonical: '/destinations/caribbean',
+    },
   };
 };
 

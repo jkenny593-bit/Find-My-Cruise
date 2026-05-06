@@ -69,12 +69,26 @@ export default function AboutPage() {
               a budget-friendly choice, a balanced mid-range pick, and a premium 
               luxury experience.
             </p>
-            <Link 
-              href="/find" 
-              className="inline-block bg-accent text-primary px-8 py-3 rounded-full font-bold hover:scale-105 transition-transform"
-            >
-              Start a Chat with Mara
-            </Link>
+            <div className="flex flex-wrap gap-4 pt-4">
+              <Link 
+                href="/find" 
+                className="bg-accent text-primary px-8 py-3 rounded-full font-bold hover:scale-105 transition-transform"
+              >
+                Start a Chat
+              </Link>
+              <Link 
+                href="/destinations/mediterranean" 
+                className="border border-primary/20 text-primary px-6 py-3 rounded-full font-bold text-sm hover:bg-primary/5 transition-colors"
+              >
+                Mediterranean Deals
+              </Link>
+              <Link 
+                href="/destinations/caribbean" 
+                className="border border-primary/20 text-primary px-6 py-3 rounded-full font-bold text-sm hover:bg-primary/5 transition-colors"
+              >
+                Caribbean Holidays
+              </Link>
+            </div>
           </div>
         </section>
 

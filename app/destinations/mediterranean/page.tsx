@@ -6,6 +6,9 @@ export const generateMetadata = (): Metadata => {
   return {
     title: 'Cheap Mediterranean Cruise Deals from Ireland | FindMyCruise.ie',
     description: 'Find the cheapest Mediterranean cruise deals for 2026. Compare prices and itineraries from Dublin and Cork. Budget to luxury options hand-picked by Mara.',
+    alternates: {
+      canonical: '/destinations/mediterranean',
+    },
   };
 };
 

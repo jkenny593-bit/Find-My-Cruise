@@ -6,6 +6,9 @@ export const generateMetadata = (): Metadata => {
   return {
     title: 'Norwegian Fjords Cruises from Ireland | FindMyCruise.ie',
     description: 'Breathtaking Norwegian Fjords cruises with easy connections from Dublin and Cork. Explore hand-picked itineraries for 2026.',
+    alternates: {
+      canonical: '/destinations/fjords',
+    },
   };
 };
 
