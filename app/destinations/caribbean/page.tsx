@@ -19,6 +19,43 @@ export default function CaribbeanPage() {
 
   return (
     <div className="bg-background min-h-screen">
+      {/* FAQ Schema for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What is the best time for a Caribbean cruise from Ireland?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "The most popular time is during the Irish winter (December to April) when the weather in the Caribbean is dry and warm. This is the perfect time to escape the cold at home."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do I need a visa for a Caribbean cruise?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "As an Irish citizen, you generally do not need a visa for most Caribbean islands, but if your cruise departs from a US port (like Miami), you will need a valid ESTA."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Which Irish airports fly to Caribbean cruise hubs?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Dublin Airport offers the best connections, often via London, Amsterdam, or direct flights to major US hubs. Cork and Shannon also offer convenient connections through major European cities."
+                }
+              }
+            ]
+          })
+        }}
+      />
+
       {/* Hero Section */}
       <section className="relative h-[60vh] flex items-center justify-center overflow-hidden bg-primary text-white">
         <div className="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1548574505-5e239809ee19?auto=format&fit=crop&q=80&w=1200')] bg-cover bg-center" />

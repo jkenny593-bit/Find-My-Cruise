@@ -19,6 +19,35 @@ export default function MediterraneanPage() {
 
   return (
     <div className="bg-background min-h-screen">
+      {/* FAQ Schema for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Why book a Mediterranean cruise from Ireland?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "The Mediterranean remains the top choice for Irish cruisers due to direct flights from Dublin and Cork to hubs like Barcelona and Rome. Our AI specialist Mara helps sync these with Irish flight schedules."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Are Mediterranean cruises family friendly?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes, Mediterranean cruises offer great kids' clubs and safe excursions, making them perfect for families."
+                }
+              }
+            ]
+          })
+        }}
+      />
+
       {/* Hero Header */}
       <div className="bg-primary py-20 text-center">
         <div className="max-w-[1200px] mx-auto px-4">

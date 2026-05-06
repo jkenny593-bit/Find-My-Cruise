@@ -1,4 +1,15 @@
+import { Metadata } from 'next';
 import Link from 'next/link';
+
+export const generateMetadata = (): Metadata => {
+  return {
+    title: "FindMyCruise.ie | AI Cruise Finder for Irish Travellers",
+    description: "Find your perfect cruise holiday with Mara, our Irish-focused AI cruise specialist. Personalized recommendations from Dublin, Cork, Shannon, and Belfast.",
+    alternates: {
+      canonical: '/',
+    },
+  };
+};
 
 export default function Home() {
   return (

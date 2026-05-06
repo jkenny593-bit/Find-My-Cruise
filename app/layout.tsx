@@ -69,33 +69,45 @@ export default function RootLayout({
             })();
           `}
         </Script>
-        {/* Schema.org for AI discovery */}
+        {/* Structured Data for SEO */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "TravelAgency",
-              "name": "FindMyCruise.ie",
-              "description": "AI-powered cruise comparison and recommendation service for Irish travellers.",
-              "url": "https://findmycruise.ie",
-              "telephone": "",
-              "address": {
-                "@type": "PostalAddress",
-                "addressCountry": "IE"
+            __html: JSON.stringify([
+              {
+                "@context": "https://schema.org",
+                "@type": "TravelAgency",
+                "@id": "https://findmycruise.ie/#agency",
+                "name": "FindMyCruise.ie",
+                "description": "Ireland's premier AI-powered cruise search engine for personalized recommendations from Dublin, Cork, and Shannon.",
+                "url": "https://findmycruise.ie",
+                "logo": "https://findmycruise.ie/logo.png",
+                "image": "https://findmycruise.ie/logo.png",
+                "priceRange": "€€",
+                "areaServed": {
+                  "@type": "Country",
+                  "name": "Ireland"
+                },
+                "serviceType": "Cruise Recommendation",
+                "address": {
+                  "@type": "PostalAddress",
+                  "addressCountry": "IE"
+                },
+                "brand": {
+                  "@type": "Brand",
+                  "name": "Mara AI"
+                }
               },
-              "image": "https://findmycruise.ie/logo.png",
-              "priceRange": "€€",
-              "areaServed": {
-                "@type": "Country",
-                "name": "Ireland"
-              },
-              "serviceType": "Cruise Recommendation",
-              "brand": {
-                "@type": "Brand",
-                "name": "Mara AI"
+              {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                "@id": "https://findmycruise.ie/#website",
+                "url": "https://findmycruise.ie",
+                "name": "FindMyCruise.ie",
+                "description": "AI-powered cruise finder for Irish travellers.",
+                "publisher": { "@id": "https://findmycruise.ie/#agency" }
               }
-            })
+            ])
           }}
         />
       </body>
