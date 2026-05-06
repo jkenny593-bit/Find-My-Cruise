@@ -80,13 +80,19 @@ export default function RoyalCaribbeanPage() {
               and **Southampton** which offer the most convenient travel options from 
               the Emerald Isle.
             </p>
-            <div className="pt-4">
+            <div className="pt-4 flex flex-wrap gap-4">
               <a 
                 href="/find" 
                 className="inline-block bg-[#0055A4] text-white px-8 py-3 rounded-full font-bold hover:bg-opacity-90 transition-all shadow-md"
               >
-                Let Mara find your Royal Caribbean Cruise
+                Let Mara find your Cruise
               </a>
+              <Link 
+                href="/cruise-lines/royal-caribbean/fleet" 
+                className="inline-block border border-[#0055A4] text-[#0055A4] px-8 py-3 rounded-full font-bold hover:bg-[#0055A4]/5 transition-all"
+              >
+                View Full Fleet Guide
+              </Link>
             </div>
           </div>
           <div className="lg:w-1/2 bg-[#0055A4]/5 flex items-center justify-center p-12">
