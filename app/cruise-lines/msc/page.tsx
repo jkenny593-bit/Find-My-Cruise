@@ -80,13 +80,19 @@ export default function MscPage() {
               you're a couple looking for a stylish getaway or a family seeking 
               unending entertainment, MSC has a ship that fits.
             </p>
-            <div className="pt-4">
+            <div className="pt-4 flex flex-wrap gap-4">
               <a 
                 href="/find" 
                 className="inline-block bg-[#1A1A1A] text-white px-8 py-3 rounded-full font-bold hover:bg-opacity-90 transition-all shadow-md"
               >
                 Let Mara find your MSC Cruise
               </a>
+              <Link 
+                href="/cruise-lines/msc/fleet" 
+                className="inline-block border border-[#1A1A1A] text-[#1A1A1A] px-8 py-3 rounded-full font-bold hover:bg-[#1A1A1A]/5 transition-all"
+              >
+                View the Full Fleet
+              </Link>
             </div>
           </div>
           <div className="lg:w-1/2 bg-[#1A1A1A]/5 flex items-center justify-center p-12">
