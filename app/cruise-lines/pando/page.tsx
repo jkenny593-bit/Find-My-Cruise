@@ -80,14 +80,21 @@ export default function PandoPage() {
               the Canary Islands. Mara can help you find the best flights to match 
               your P&O sailing perfectly.
             </p>
-            <div className="pt-4">
+            <div className="pt-4 flex flex-wrap gap-4">
               <a 
                 href="/find" 
                 className="inline-block bg-[#002244] text-white px-8 py-3 rounded-full font-bold hover:bg-opacity-90 transition-all shadow-md"
               >
-                Ask Mara about P&O Cruises
+                Let Mara find your P&O Cruise
               </a>
+              <Link 
+                href="/cruise-lines/pando/fleet" 
+                className="inline-block border border-[#002244] text-[#002244] px-8 py-3 rounded-full font-bold hover:bg-[#002244]/5 transition-all"
+              >
+                View Full Fleet Guide
+              </Link>
             </div>
+
           </div>
           <div className="lg:w-1/2 bg-[#002244]/5 flex items-center justify-center p-12">
             <div className="space-y-4 text-center">
