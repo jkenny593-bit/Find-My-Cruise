@@ -13,23 +13,23 @@ const FLEET = [
   {
     class: "Icon Class",
     ships: [
-      { name: "Icon of the Seas", year: 2024, feature: "Largest Waterpark at Sea", profile: "The ultimate family vacation, perfect for those flying from Dublin to Miami." },
-      { name: "Star of the Seas", year: 2025, feature: "Lincoln Park neighborhood", profile: "Coming soon to Port Canaveral, ideal for a Florida fly-cruise." }
+      { name: "Icon of the Seas", year: 2024, feature: "Largest Waterpark at Sea", profile: "The ultimate family vacation, perfect for those flying from Dublin to Miami.", tourUrl: "https://www.youtube.com/results?search_query=icon+of+the+seas+ship+tour" },
+      { name: "Star of the Seas", year: 2025, feature: "Lincoln Park neighborhood", profile: "Coming soon to Port Canaveral, ideal for a Florida fly-cruise.", tourUrl: "https://www.youtube.com/results?search_query=star+of+the+seas+royal+caribbean+preview" }
     ]
   },
   {
     class: "Oasis Class",
     ships: [
-      { name: "Utopia of the Seas", year: 2024, feature: "The World's Biggest Weekend", profile: "Perfect for short 3-4 night Bahamas escapes from Port Canaveral." },
-      { name: "Wonder of the Seas", year: 2022, feature: "8 Unique Neighborhoods", profile: "A Med favorite, often sailing from Barcelona with great Irish connections." },
-      { name: "Symphony of the Seas", year: 2018, feature: "Ultimate Abyss Slide", profile: "A classic Oasis experience for high-energy families." }
+      { name: "Utopia of the Seas", year: 2024, feature: "The World's Biggest Weekend", profile: "Perfect for short 3-4 night Bahamas escapes from Port Canaveral.", tourUrl: "https://www.youtube.com/results?search_query=utopia+of+the+seas+ship+tour" },
+      { name: "Wonder of the Seas", year: 2022, feature: "8 Unique Neighborhoods", profile: "A Med favorite, often sailing from Barcelona with great Irish connections.", tourUrl: "https://www.youtube.com/results?search_query=wonder+of+the+seas+ship+tour" },
+      { name: "Symphony of the Seas", year: 2018, feature: "Ultimate Abyss Slide", profile: "A classic Oasis experience for high-energy families.", tourUrl: "https://www.youtube.com/results?search_query=symphony+of+the+seas+ship+tour" }
     ]
   },
   {
     class: "Quantum Ultra Class",
     ships: [
-      { name: "Odyssey of the Seas", year: 2021, feature: "SeaPlex Indoor Activity Space", profile: "A top choice for Greek Isles cruises from Rome." },
-      { name: "Anthem of the Seas", year: 2015, feature: "North Star Observation Pod", profile: "Frequently sails from Southampton, very popular for Irish travellers avoiding flights." }
+      { name: "Odyssey of the Seas", year: 2021, feature: "SeaPlex Indoor Activity Space", profile: "A top choice for Greek Isles cruises from Rome.", tourUrl: "https://www.youtube.com/results?search_query=odyssey+of+the+seas+ship+tour" },
+      { name: "Anthem of the Seas", year: 2015, feature: "North Star Observation Pod", profile: "Frequently sails from Southampton, very popular for Irish travellers avoiding flights.", tourUrl: "https://www.youtube.com/results?search_query=anthem+of+the+seas+ship+tour" }
     ]
   }
 ];
@@ -58,7 +58,7 @@ export default function RoyalCaribbeanFleetPage() {
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {fleetClass.ships.map((ship, sIdx) => (
-                  <div key={sIdx} className="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition-all group">
+                  <div key={sIdx} className="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition-all group flex flex-col h-full">
                     <div className="flex justify-between items-start mb-6">
                       <div>
                         <h3 className="text-xl font-bold text-primary group-hover:text-[#0055A4] transition-colors">{ship.name}</h3>
@@ -67,15 +67,26 @@ export default function RoyalCaribbeanFleetPage() {
                       <div className="bg-blue-50 text-[#0055A4] text-[10px] font-bold px-2 py-1 rounded uppercase">Active Fleet</div>
                     </div>
                     
-                    <div className="space-y-4">
+                    <div className="space-y-4 flex-grow">
                       <div className="bg-primary/5 p-4 rounded-2xl">
                         <p className="text-[10px] font-bold text-primary uppercase tracking-wider mb-1">Standout Feature</p>
                         <p className="text-primary font-medium text-sm">{ship.feature}</p>
                       </div>
                       <p className="text-text/70 text-sm leading-relaxed italic">"{ship.profile}"</p>
                     </div>
+
+                    <div className="mt-6">
+                      <a 
+                        href={ship.tourUrl} 
+                        target="_blank" 
+                        rel="nofollow noopener"
+                        className="flex items-center justify-center gap-2 w-full bg-red-600 text-white py-3 rounded-xl font-bold text-xs hover:bg-red-700 transition-colors"
+                      >
+                        <span className="text-lg">▶</span> Watch Full Ship Tour
+                      </a>
+                    </div>
                     
-                    <div className="mt-8 pt-6 border-t border-gray-50">
+                    <div className="mt-6 pt-6 border-t border-gray-50">
                       <Link 
                         href="/find" 
                         className="text-[#0055A4] font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all"

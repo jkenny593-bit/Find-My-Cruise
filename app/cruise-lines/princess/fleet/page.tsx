@@ -13,17 +13,17 @@ const FLEET = [
   {
     class: "Sphere Class",
     ships: [
-      { name: "Sun Princess", year: 2024, feature: "The Dome & Sphere Atrium", profile: "The next generation of Princess, perfect for a high-end Med fly-cruise from Dublin." },
-      { name: "Star Princess", year: 2025, feature: "Park19 Adventure Zone", profile: "A sister to Sun Princess, launching soon for premium Caribbean exploration." }
+      { name: "Sun Princess", year: 2024, feature: "The Dome & Sphere Atrium", profile: "The next generation of Princess, perfect for a high-end Med fly-cruise from Dublin.", tourUrl: "https://www.youtube.com/results?search_query=sun+princess+ship+tour" },
+      { name: "Star Princess", year: 2025, feature: "Park19 Adventure Zone", profile: "A sister to Sun Princess, launching soon for premium Caribbean exploration.", tourUrl: "https://www.youtube.com/results?search_query=star+princess+ship+tour" }
     ]
   },
   {
     class: "Royal Class",
     ships: [
-      { name: "Discovery Princess", year: 2022, feature: "Sky Suites with 270° Views", profile: "A top-tier luxury choice, often found on stunning Alaska and Coastal routes." },
-      { name: "Enchanted Princess", year: 2020, feature: "The Sanctuary (Adults-only)", profile: "Refined and elegant, a favorite for Irish couples seeking a romantic getaway." },
-      { name: "Sky Princess", year: 2019, feature: "OceanMedallion Technology", profile: "Frequently sails from Southampton, making it very accessible for the Irish market." },
-      { name: "Majestic Princess", year: 2017, feature: "SeaWalk Glass Bridge", profile: "Renowned for its global itineraries and exceptional culinary offerings." }
+      { name: "Discovery Princess", year: 2022, feature: "Sky Suites with 270° Views", profile: "A top-tier luxury choice, often found on stunning Alaska and Coastal routes.", tourUrl: "https://www.youtube.com/results?search_query=discovery+princess+ship+tour" },
+      { name: "Enchanted Princess", year: 2020, feature: "The Sanctuary (Adults-only)", profile: "Refined and elegant, a favorite for Irish couples seeking a romantic getaway.", tourUrl: "https://www.youtube.com/results?search_query=enchanted+princess+ship+tour" },
+      { name: "Sky Princess", year: 2019, feature: "OceanMedallion Technology", profile: "Frequently sails from Southampton, making it very accessible for the Irish market.", tourUrl: "https://www.youtube.com/results?search_query=sky+princess+ship+tour" },
+      { name: "Majestic Princess", year: 2017, feature: "SeaWalk Glass Bridge", profile: "Renowned for its global itineraries and exceptional culinary offerings.", tourUrl: "https://www.youtube.com/results?search_query=majestic+princess+ship+tour" }
     ]
   }
 ];
@@ -70,6 +70,17 @@ export default function PrincessFleetPage() {
                         <p className="text-primary font-bold text-sm tracking-tight">{ship.feature}</p>
                       </div>
                       <p className="text-text/70 text-sm leading-relaxed font-light">"{ship.profile}"</p>
+                    </div>
+
+                    <div className="mt-6">
+                      <a 
+                        href={ship.tourUrl} 
+                        target="_blank" 
+                        rel="nofollow noopener"
+                        className="flex items-center justify-center gap-2 w-full bg-red-600 text-white py-3 rounded-xl font-bold text-xs hover:bg-red-700 transition-colors"
+                      >
+                        <span className="text-lg">▶</span> Watch Ship Tour
+                      </a>
                     </div>
                     
                     <div className="mt-10 pt-8 border-t border-gray-100">

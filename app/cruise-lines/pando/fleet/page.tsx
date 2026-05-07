@@ -13,23 +13,23 @@ const FLEET = [
   {
     class: "Excel Class",
     ships: [
-      { name: "Arvia", year: 2022, feature: "SkyDome with Retractable Roof", profile: "Designed for sunshine, Arvia is perfect for Caribbean winters and Med summers." },
-      { name: "Iona", year: 2021, feature: "Two-tier SkyDome & Conservatory", profile: "The ultimate Fjord ship, offering spectacular views and great value from Southampton." }
+      { name: "Arvia", year: 2022, feature: "SkyDome with Retractable Roof", profile: "Designed for sunshine, Arvia is perfect for Caribbean winters and Med summers.", tourUrl: "https://www.youtube.com/results?search_query=po+cruises+arvia+ship+tour" },
+      { name: "Iona", year: 2021, feature: "Two-tier SkyDome & Conservatory", profile: "The ultimate Fjord ship, offering spectacular views and great value from Southampton.", tourUrl: "https://www.youtube.com/results?search_query=po+cruises+iona+ship+tour" }
     ]
   },
   {
     class: "Mid-Sized Ships",
     ships: [
-      { name: "Britannia", year: 2015, feature: "The Epicurean Restaurant", profile: "The flagship of the fleet, balancing modern amenities with classic British elegance." },
-      { name: "Azura", year: 2010, feature: "SeaScreen Outdoor Cinema", profile: "A family favorite, particularly popular for value-driven Mediterranean loops." },
-      { name: "Ventura", year: 2008, feature: "The Exchange Pub", profile: "A relaxed, family-friendly ship with a great atmosphere and varied dining." }
+      { name: "Britannia", year: 2015, feature: "The Epicurean Restaurant", profile: "The flagship of the fleet, balancing modern amenities with classic British elegance.", tourUrl: "https://www.youtube.com/results?search_query=po+cruises+britannia+ship+tour" },
+      { name: "Azura", year: 2010, feature: "SeaScreen Outdoor Cinema", profile: "A family favorite, particularly popular for value-driven Mediterranean loops.", tourUrl: "https://www.youtube.com/results?search_query=po+cruises+azura+ship+tour" },
+      { name: "Ventura", year: 2008, feature: "The Exchange Pub", profile: "A relaxed, family-friendly ship with a great atmosphere and varied dining.", tourUrl: "https://www.youtube.com/results?search_query=po+cruises+ventura+ship+tour" }
     ]
   },
   {
     class: "Adult-Only Ships",
     ships: [
-      { name: "Arcadia", year: 2005, feature: "Caffè Nero & Boutique Atmosphere", profile: "Exclusively for adults, offering a sophisticated and calm environment." },
-      { name: "Aurora", year: 2000, feature: "Classic Teak Decks", profile: "A mid-sized traditional ship, perfect for those who enjoy classic cruising without the crowds." }
+      { name: "Arcadia", year: 2005, feature: "Caffè Nero & Boutique Atmosphere", profile: "Exclusively for adults, offering a sophisticated and calm environment.", tourUrl: "https://www.youtube.com/results?search_query=po+cruises+arcadia+ship+tour" },
+      { name: "Aurora", year: 2000, feature: "Classic Teak Decks", profile: "A mid-sized traditional ship, perfect for those who enjoy classic cruising without the crowds.", tourUrl: "https://www.youtube.com/results?search_query=po+cruises+aurora+ship+tour" }
     ]
   }
 ];
@@ -73,6 +73,17 @@ export default function PandoFleetPage() {
                         <p className="text-primary font-bold text-sm">{ship.feature}</p>
                       </div>
                       <p className="text-text/70 text-sm leading-relaxed italic">"{ship.profile}"</p>
+                    </div>
+
+                    <div className="mt-6">
+                      <a 
+                        href={ship.tourUrl} 
+                        target="_blank" 
+                        rel="nofollow noopener"
+                        className="flex items-center justify-center gap-2 w-full bg-red-600 text-white py-3 rounded-xl font-bold text-xs hover:bg-red-700 transition-colors"
+                      >
+                        <span className="text-lg">▶</span> Watch Full Ship Tour
+                      </a>
                     </div>
                     
                     <div className="mt-8 pt-6 border-t border-gray-50">

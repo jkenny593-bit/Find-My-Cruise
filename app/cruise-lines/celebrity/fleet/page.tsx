@@ -13,18 +13,18 @@ const FLEET = [
   {
     class: "Edge Series",
     ships: [
-      { name: "Celebrity Ascent", year: 2023, feature: "The Magic Carpet®", profile: "The newest flagship, offering unparalleled design for Mediterranean sailings from Rome." },
-      { name: "Celebrity Beyond", year: 2022, feature: "Expanded Rooftop Garden", profile: "A favorite for luxury seekers flying from Dublin for a premium experience." },
-      { name: "Celebrity Apex", year: 2020, feature: "Infinite Verandas", profile: "Often sails from Southampton, making it very accessible for Irish travellers who prefer UK ports." },
-      { name: "Celebrity Edge", year: 2018, feature: "Eden Multi-level Venue", profile: "The ship that started the revolution, perfect for a modern first-time cruiser." }
+      { name: "Celebrity Ascent", year: 2023, feature: "The Magic Carpet®", profile: "The newest flagship, offering unparalleled design for Mediterranean sailings from Rome.", tourUrl: "https://www.youtube.com/results?search_query=celebrity+ascent+ship+tour" },
+      { name: "Celebrity Beyond", year: 2022, feature: "Expanded Rooftop Garden", profile: "A favorite for luxury seekers flying from Dublin for a premium experience.", tourUrl: "https://www.youtube.com/results?search_query=celebrity+beyond+ship+tour" },
+      { name: "Celebrity Apex", year: 2020, feature: "Infinite Verandas", profile: "Often sails from Southampton, making it very accessible for Irish travellers who prefer UK ports.", tourUrl: "https://www.youtube.com/results?search_query=celebrity+apex+ship+tour" },
+      { name: "Celebrity Edge", year: 2018, feature: "Eden Multi-level Venue", profile: "The ship that started the revolution, perfect for a modern first-time cruiser.", tourUrl: "https://www.youtube.com/results?search_query=celebrity+edge+ship+tour" }
     ]
   },
   {
     class: "Solstice Class",
     ships: [
-      { name: "Celebrity Reflection", year: 2012, feature: "Real Grass Lawn Club", profile: "The largest of the Solstice class, known for its incredible space and dining." },
-      { name: "Celebrity Silhouette", year: 2011, feature: "The Hideaway Lounge", profile: "A beautifully refurbished classic, often offering great value on Greek Isles routes." },
-      { name: "Celebrity Equinox", year: 2009, feature: "Corning Museum of Glass", profile: "Highly rated for its service and elegant atmosphere." }
+      { name: "Celebrity Reflection", year: 2012, feature: "Real Grass Lawn Club", profile: "The largest of the Solstice class, known for its incredible space and dining.", tourUrl: "https://www.youtube.com/results?search_query=celebrity+reflection+ship+tour" },
+      { name: "Celebrity Silhouette", year: 2011, feature: "The Hideaway Lounge", profile: "A beautifully refurbished classic, often offering great value on Greek Isles routes.", tourUrl: "https://www.youtube.com/results?search_query=celebrity+silhouette+ship+tour" },
+      { name: "Celebrity Equinox", year: 2009, feature: "Corning Museum of Glass", profile: "Highly rated for its service and elegant atmosphere.", tourUrl: "https://www.youtube.com/results?search_query=celebrity+equinox+ship+tour" }
     ]
   }
 ];
@@ -71,6 +71,17 @@ export default function CelebrityFleetPage() {
                         <p className="text-primary font-bold text-sm tracking-tight">{ship.feature}</p>
                       </div>
                       <p className="text-text/70 text-sm leading-relaxed font-light">"{ship.profile}"</p>
+                    </div>
+
+                    <div className="mt-6">
+                      <a 
+                        href={ship.tourUrl} 
+                        target="_blank" 
+                        rel="nofollow noopener"
+                        className="flex items-center justify-center gap-2 w-full bg-red-600 text-white py-3 rounded-xl font-bold text-xs hover:bg-red-700 transition-colors"
+                      >
+                        <span className="text-lg">▶</span> Watch Ship Tour
+                      </a>
                     </div>
                     
                     <div className="mt-10 pt-8 border-t border-gray-100">

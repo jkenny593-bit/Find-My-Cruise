@@ -13,23 +13,23 @@ const FLEET = [
   {
     class: "World Class",
     ships: [
-      { name: "MSC World America", year: 2025, feature: "The World Promenade", profile: "Launching soon for Caribbean sailings from Miami, perfect for a US fly-cruise." },
-      { name: "MSC World Europa", year: 2022, feature: "Largest Waterpark in Fleet", profile: "The ultimate Med ship, offering incredible value from Barcelona for Irish families." }
+      { name: "MSC World America", year: 2025, feature: "The World Promenade", profile: "Launching soon for Caribbean sailings from Miami, perfect for a US fly-cruise.", tourUrl: "https://www.youtube.com/results?search_query=msc+world+america+ship+tour" },
+      { name: "MSC World Europa", year: 2022, feature: "Largest Waterpark in Fleet", profile: "The ultimate Med ship, offering incredible value from Barcelona for Irish families.", tourUrl: "https://www.youtube.com/results?search_query=msc+world+europa+ship+tour" }
     ]
   },
   {
     class: "Meraviglia & Meraviglia Plus",
     ships: [
-      { name: "MSC Euribia", year: 2023, feature: "Most Environmentally Advanced", profile: "A Northern Europe favorite, often sailing from Southampton or Copenhagen." },
-      { name: "MSC Virtuosa", year: 2021, feature: "Robotic Bartender 'Rob'", profile: "Very popular for departures from UK ports, perfect for Irish travellers avoiding long flights." },
-      { name: "MSC Grandiosa", year: 2019, feature: "Galleria Grandiosa Promenade", profile: "A massive, high-energy ship that Irish guests love for its entertainment." }
+      { name: "MSC Euribia", year: 2023, feature: "Most Environmentally Advanced", profile: "A Northern Europe favorite, often sailing from Southampton or Copenhagen.", tourUrl: "https://www.youtube.com/results?search_query=msc+euribia+ship+tour" },
+      { name: "MSC Virtuosa", year: 2021, feature: "Robotic Bartender 'Rob'", profile: "Very popular for departures from UK ports, perfect for Irish travellers avoiding long flights.", tourUrl: "https://www.youtube.com/results?search_query=msc+virtuosa+ship+tour" },
+      { name: "MSC Grandiosa", year: 2019, feature: "Galleria Grandiosa Promenade", profile: "A massive, high-energy ship that Irish guests love for its entertainment.", tourUrl: "https://www.youtube.com/results?search_query=msc+grandiosa+ship+tour" }
     ]
   },
   {
     class: "Seaside Class",
     ships: [
-      { name: "MSC Seascape", year: 2022, feature: "Robotron Amusement Ride", profile: "Designed to connect guests with the sea, ideal for sunny Caribbean itineraries." },
-      { name: "MSC Seaview", year: 2018, feature: "360-degree Waterfront Boardwalk", profile: "A beautiful Mediterranean ship with fantastic outdoor spaces." }
+      { name: "MSC Seascape", year: 2022, feature: "Robotron Amusement Ride", profile: "Designed to connect guests with the sea, ideal for sunny Caribbean itineraries.", tourUrl: "https://www.youtube.com/results?search_query=msc+seascape+ship+tour" },
+      { name: "MSC Seaview", year: 2018, feature: "360-degree Waterfront Boardwalk", profile: "A beautiful Mediterranean ship with fantastic outdoor spaces.", tourUrl: "https://www.youtube.com/results?search_query=msc+seaview+ship+tour" }
     ]
   }
 ];
@@ -74,6 +74,17 @@ export default function MscFleetPage() {
                         <p className="text-primary font-bold text-sm">{ship.feature}</p>
                       </div>
                       <p className="text-text/70 text-sm leading-relaxed italic">"{ship.profile}"</p>
+                    </div>
+
+                    <div className="mt-6">
+                      <a 
+                        href={ship.tourUrl} 
+                        target="_blank" 
+                        rel="nofollow noopener"
+                        className="flex items-center justify-center gap-2 w-full bg-red-600 text-white py-3 rounded-xl font-bold text-xs hover:bg-red-700 transition-colors"
+                      >
+                        <span className="text-lg">▶</span> Watch Full Ship Tour
+                      </a>
                     </div>
                     
                     <div className="mt-8 pt-6 border-t border-gray-50">
