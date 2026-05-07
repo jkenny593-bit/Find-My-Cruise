@@ -75,7 +75,7 @@ export default function RoyalCaribbeanFleetPage() {
                       <p className="text-text/70 text-sm leading-relaxed italic">"{ship.profile}"</p>
                     </div>
 
-                    <div className="mt-6">
+                    <div className="mt-6 flex flex-col gap-3">
                       <a 
                         href={ship.tourUrl} 
                         target="_blank" 
@@ -83,6 +83,14 @@ export default function RoyalCaribbeanFleetPage() {
                         className="flex items-center justify-center gap-2 w-full bg-red-600 text-white py-3 rounded-xl font-bold text-xs hover:bg-red-700 transition-colors"
                       >
                         <span className="text-lg">▶</span> Watch Full Ship Tour
+                      </a>
+                      <a 
+                        href="https://www.royalcaribbean.com/cruise-ships?utm_source=findmycruise&utm_medium=affiliate"
+                        target="_blank" 
+                        rel="nofollow noopener"
+                        className="text-center text-[#0055A4] font-bold text-[10px] uppercase tracking-widest hover:underline"
+                      >
+                        Official Ship Specifications
                       </a>
                     </div>
                     
