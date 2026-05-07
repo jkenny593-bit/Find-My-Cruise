@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import dotenv from 'dotenv';
+import { STATIC_FALLBACK_PRICES } from '../lib/flights/ports';
 
 // Load environment variables from .env.local
 dotenv.config({ path: '.env.local' });
@@ -30,6 +31,9 @@ const ROUTES: Route[] = [
   { origin: 'SNN', destination: 'BCN', label: 'Shannon to Barcelona' },
   { origin: 'SNN', destination: 'LHR', label: 'Shannon to London' },
   { origin: 'SNN', destination: 'MIA', label: 'Shannon to Miami' },
+  { origin: 'BFS', destination: 'BCN', label: 'Belfast to Barcelona' },
+  { origin: 'BFS', destination: 'LHR', label: 'Belfast to London' },
+  { origin: 'BFS', destination: 'MIA', label: 'Belfast to Miami' },
 ];
 
 async function updateFlightPrices() {
@@ -87,12 +91,18 @@ async function updateFlightPrices() {
 
       console.log(`✅ ${route.label} (${routeKey}): €${min}-€${newPrices[routeKey].max}`);
     } catch (error) {
-      // Fallback to existing value
+      // Fallback 1: Existing data from cache
       if (existingData.prices[routeKey]) {
         newPrices[routeKey] = existingData.prices[routeKey];
         console.log(`⚠️ ${route.label} (${routeKey}): API failed, used fallback from cache.`);
-      } else {
-        console.log(`❌ ${route.label} (${routeKey}): API failed and no fallback available.`);
+      } 
+      // Fallback 2: Static defaults from ports.ts
+      else if (STATIC_FALLBACK_PRICES[routeKey]) {
+        newPrices[routeKey] = STATIC_FALLBACK_PRICES[routeKey];
+        console.log(`⚠️ ${route.label} (${routeKey}): API and cache failed, used static default.`);
+      }
+      else {
+        console.log(`❌ ${route.label} (${routeKey}): No data or fallback available.`);
       }
     }
 

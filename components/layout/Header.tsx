@@ -41,12 +41,21 @@ const Header = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
               </svg>
             </button>
-            <div className="absolute top-full left-0 bg-white text-primary min-w-[220px] shadow-2xl rounded-b-2xl overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-100">
-              <Link href="/cruise-lines/royal-caribbean" className="block px-8 py-4 hover:bg-surface transition-colors border-b border-gray-50">Royal Caribbean</Link>
-              <Link href="/cruise-lines/pando" className="block px-8 py-4 hover:bg-surface transition-colors border-b border-gray-50">P&O Cruises</Link>
-              <Link href="/cruise-lines/msc" className="block px-8 py-4 hover:bg-surface transition-colors border-b border-gray-50">MSC Cruises</Link>
-              <Link href="/cruise-lines/celebrity" className="block px-8 py-4 hover:bg-surface transition-colors border-b border-gray-50">Celebrity Cruises</Link>
-              <Link href="/cruise-lines/princess" className="block px-8 py-4 hover:bg-surface transition-colors">Princess Cruises</Link>
+            <div className="absolute top-full left-0 bg-white text-primary min-w-[280px] shadow-2xl rounded-b-2xl overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-100">
+              <div className="grid grid-cols-1 divide-y divide-gray-50">
+                {[
+                  { name: 'Royal Caribbean', path: '/cruise-lines/royal-caribbean', fleet: '/cruise-lines/royal-caribbean/fleet' },
+                  { name: 'P&O Cruises', path: '/cruise-lines/pando', fleet: '/cruise-lines/pando/fleet' },
+                  { name: 'MSC Cruises', path: '/cruise-lines/msc', fleet: '/cruise-lines/msc/fleet' },
+                  { name: 'Celebrity Cruises', path: '/cruise-lines/celebrity', fleet: '/cruise-lines/celebrity/fleet' },
+                  { name: 'Princess Cruises', path: '/cruise-lines/princess', fleet: '/cruise-lines/princess/fleet' },
+                ].map((line) => (
+                  <div key={line.name} className="flex items-center justify-between group/item px-6 py-4 hover:bg-surface transition-colors">
+                    <Link href={line.path} className="font-bold text-primary hover:text-accent transition-colors">{line.name}</Link>
+                    <Link href={line.fleet} className="text-[10px] font-bold uppercase tracking-wider bg-primary/5 px-2 py-1 rounded hover:bg-accent hover:text-white transition-all">Fleet Guide</Link>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 

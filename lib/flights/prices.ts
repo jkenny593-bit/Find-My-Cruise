@@ -21,7 +21,7 @@ interface FlightData {
  * Checks the local cache first, falling back to static estimates if missing or stale (>48h).
  */
 export function getFlightPrice(
-  origin: 'DUB' | 'ORK' | 'SNN',
+  origin: 'DUB' | 'ORK' | 'SNN' | 'BFS',
   cruiseRegion: string
 ): FlightPrice | null {
   const destinationIata = CRUISE_PORT_MAP[cruiseRegion];

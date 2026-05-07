@@ -1,10 +1,10 @@
 {
-  "lastUpdated": "2026-05-04T22:04:51.649Z",
+  "lastUpdated": "2026-05-07T21:10:43.488Z",
   "month": "2026-06",
   "prices": {
     "DUB-BCN": {
-      "min": 86,
-      "max": 112,
+      "min": 82,
+      "max": 107,
       "currency": "EUR"
     },
     "DUB-FCO": {
@@ -13,8 +13,8 @@
       "currency": "EUR"
     },
     "DUB-ATH": {
-      "min": 159,
-      "max": 207,
+      "min": 155,
+      "max": 202,
       "currency": "EUR"
     },
     "DUB-LIS": {
@@ -63,8 +63,8 @@
       "currency": "EUR"
     },
     "SNN-BCN": {
-      "min": 105,
-      "max": 137,
+      "min": 128,
+      "max": 166,
       "currency": "EUR"
     },
     "SNN-LHR": {
@@ -75,6 +75,21 @@
     "SNN-MIA": {
       "min": 692,
       "max": 1038,
+      "currency": "EUR"
+    },
+    "BFS-BCN": {
+      "min": 145,
+      "max": 225,
+      "currency": "EUR"
+    },
+    "BFS-LHR": {
+      "min": 50,
+      "max": 125,
+      "currency": "EUR"
+    },
+    "BFS-MIA": {
+      "min": 390,
+      "max": 560,
       "currency": "EUR"
     }
   }

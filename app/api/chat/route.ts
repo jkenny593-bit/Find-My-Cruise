@@ -11,14 +11,20 @@ const model = genAI.getGenerativeModel({
 
 export async function POST(req: Request) {
   try {
-    const { messages, recommendations, preferredAirport: passedAirport } = await req.json();
+    const body = await req.json();
+    const { messages, recommendations, preferredAirport: passedAirport } = body;
+
+    if (!messages || messages.length === 0) {
+      throw new Error("No messages provided");
+    }
 
     // STEP 1: Determine preferred airport from history or use default
-    let preferredAirport: 'DUB' | 'ORK' | 'SNN' = passedAirport || 'DUB';
+    let preferredAirport: 'DUB' | 'ORK' | 'SNN' | 'BFS' = passedAirport || 'DUB';
     if (!passedAirport) {
       const allText = messages.map((m: any) => m.content).join(' ').toUpperCase();
       if (allText.includes('ORK') || allText.includes('CORK')) preferredAirport = 'ORK';
       else if (allText.includes('SNN') || allText.includes('SHANNON')) preferredAirport = 'SNN';
+      else if (allText.includes('BFS') || allText.includes('BELFAST')) preferredAirport = 'BFS';
     }
 
     // STEP 2: Always build FLIGHT_CONTEXT for the AI to have "early" access to prices
@@ -59,9 +65,25 @@ export async function POST(req: Request) {
       parts: [{ text: latestMessage }]
     });
 
-    const result = await model.generateContent({
-      contents,
-    });
+    // STEP 4: Try generating content with Fallback Support
+    let result;
+    try {
+      result = await model.generateContent({ contents });
+    } catch (primaryError: any) {
+      console.error('Primary model failed, trying fallback:', primaryError.message);
+      
+      // If it's a quota or credit issue, it will usually say '429' or 'quota'
+      const isQuotaError = primaryError.message?.toLowerCase().includes('quota') || 
+                           primaryError.message?.includes('429');
+
+      if (isQuotaError) {
+        console.warn('Quota/Credit limit reached on primary model.');
+      }
+
+      // Try the 1.5-flash model as a backup
+      const fallbackModel = genAI.getGenerativeModel({ model: "gemini-1.5-flash", systemInstruction: SYSTEM_PROMPT });
+      result = await fallbackModel.generateContent({ contents });
+    }
     
     const response = await result.response;
     const text = response.text();
@@ -69,6 +91,15 @@ export async function POST(req: Request) {
     return Response.json({ text });
   } catch (error: any) {
     console.error('Chat API Error:', error);
-    return Response.json({ error: "Mara is having a quick tea break. Try again in a second!" }, { status: 500 });
+
+    let friendlyMessage = "Mara is having a quick tea break. Try again in a second!";
+    if (error.message?.includes('429') || error.message?.toLowerCase().includes('quota')) {
+      friendlyMessage = "It looks like we've hit our free AI limit for the moment. Please try again in a few minutes!";
+    }
+
+    return Response.json({ 
+      error: friendlyMessage,
+      debug: error.message 
+    }, { status: 500 });
   }
 }

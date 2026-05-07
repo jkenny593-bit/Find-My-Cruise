@@ -33,6 +33,7 @@ const ChatInterface = () => {
     const text = msgs.map(m => m.content).join(' ').toLowerCase();
     if (text.includes('cork') || text.includes('ork')) return 'ORK';
     if (text.includes('shannon') || text.includes('snn')) return 'SNN';
+    if (text.includes('belfast') || text.includes('bfs')) return 'BFS';
     return 'DUB';
   };
 
@@ -123,12 +124,12 @@ const ChatInterface = () => {
         };
         setMessages(prev => [...prev, maraMessage]);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Chat error:', error);
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: "I'm sorry, I'm having a bit of trouble connecting. Could you try that again?",
+        content: error.message || "I'm sorry, I'm having a bit of trouble connecting. Could you try that again?",
         timestamp: new Date(),
       };
       setMessages(prev => [...prev, errorMessage]);

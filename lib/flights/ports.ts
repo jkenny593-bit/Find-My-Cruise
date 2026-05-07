@@ -26,5 +26,8 @@ export const STATIC_FALLBACK_PRICES: Record<string, { min: number, max: number, 
   "ORK-LHR": { "min": 55,  "max": 130, "currency": "EUR" },
   "SNN-BCN": { "min": 140, "max": 220, "currency": "EUR" },
   "SNN-LHR": { "min": 60,  "max": 140, "currency": "EUR" },
-  "SNN-MIA": { "min": 360, "max": 510, "currency": "EUR" }
+  "SNN-MIA": { "min": 360, "max": 510, "currency": "EUR" },
+  "BFS-BCN": { "min": 145, "max": 225, "currency": "EUR" },
+  "BFS-LHR": { "min": 50,  "max": 125, "currency": "EUR" },
+  "BFS-MIA": { "min": 390, "max": 560, "currency": "EUR" }
 };
