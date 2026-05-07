@@ -78,11 +78,11 @@ export default function Home() {
             </div>
             <div className="relative aspect-square bg-surface rounded-[3rem] overflow-hidden shadow-inner border border-gray-100 flex items-center justify-center p-16">
                <div className="text-center">
-                  <div className="w-24 h-24 bg-accent/20 rounded-full mx-auto mb-8 flex items-center justify-center text-4xl">⚓</div>
-                  <p className="text-2xl font-heading font-bold text-primary italic leading-snug">
-                    "Mara saved me hours of research. She knew exactly which ships sailed with easy flights from Cork."
+                  <div className="w-24 h-24 bg-accent/20 rounded-full mx-auto mb-8 flex items-center justify-center text-4xl">🚢</div>
+                  <p className="text-2xl font-heading font-bold text-primary leading-snug">
+                    Expert Cruise Recommendations, <br/> Hand-Picked for You.
                   </p>
-                  <p className="mt-8 text-accent font-bold tracking-widest uppercase text-xs">— Verified Review</p>
+                  <p className="mt-8 text-accent font-bold tracking-widest uppercase text-xs">Direct from Dublin, Cork & Shannon</p>
                </div>
             </div>
           </div>
@@ -110,7 +110,7 @@ export default function Home() {
               { name: 'Mediterranean', img: 'https://images.unsplash.com/photo-1548574505-5e239809ee19?auto=format&fit=crop&q=80&w=800' },
               { name: 'Caribbean', img: 'https://images.unsplash.com/photo-1599640842225-85d111c60e6b?auto=format&fit=crop&q=80&w=800' },
               { name: 'Norwegian Fjords', img: 'https://images.unsplash.com/photo-1516132006923-6cf348e5dee2?auto=format&fit=crop&q=80&w=800' },
-              { name: 'River Cruises', img: 'https://images.unsplash.com/photo-1629161750599-28cc6397f02d?auto=format&fit=crop&q=80&w=1200' }
+              { name: 'River Cruises', img: 'https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&q=80&w=1200' }
             ].map((dest, i) => (
               <Link 
                 key={i} 
