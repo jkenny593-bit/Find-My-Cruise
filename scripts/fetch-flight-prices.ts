@@ -126,5 +126,7 @@ export async function updateFlightPrices() {
   console.log(`\nFlight prices update complete. Saved to ${CACHE_PATH}`);
 }
 
-// Execute
-updateFlightPrices();
+// Execute if run directly (but not when imported by Next.js build)
+if (typeof require !== 'undefined' && require.main === module) {
+  updateFlightPrices();
+}
