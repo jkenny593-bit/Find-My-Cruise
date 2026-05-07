@@ -36,7 +36,7 @@ const ROUTES: Route[] = [
   { origin: 'BFS', destination: 'MIA', label: 'Belfast to Miami' },
 ];
 
-async function updateFlightPrices() {
+export async function updateFlightPrices() {
   if (!TRAVELPAYOUTS_TOKEN) {
     console.error('TRAVELPAYOUTS_TOKEN is not set in environment variables.');
     return;

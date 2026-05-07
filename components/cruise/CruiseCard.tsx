@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import { CruiseOption } from '@/lib/widgety';
 import { generateDeepLink } from '@/lib/affiliates/utils';
