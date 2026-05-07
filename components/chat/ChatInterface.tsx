@@ -76,7 +76,11 @@ const ChatInterface = () => {
       });
 
       const data = await response.json();
-      if (data.error) throw new Error(data.error);
+      if (data.error) {
+        const err = new Error(data.error) as any;
+        err.debug = data.debug;
+        throw err;
+      }
 
       // If Mara says she's "searching" or "found options", we trigger the results
       const text = data.text.toLowerCase();
@@ -106,6 +110,13 @@ const ChatInterface = () => {
 
         const finalData = await finalResponse.json();
         
+        if (finalData.error) {
+          const err = new Error(finalData.error) as any;
+          err.debug = finalData.debug;
+          throw err;
+        }
+        if (!finalData.text) throw new Error("Mara didn't return a response. Try again?");
+
         const maraMessage: Message = {
           id: (Date.now() + 1).toString(),
           role: 'assistant',
@@ -132,6 +143,10 @@ const ChatInterface = () => {
         content: error.message || "I'm sorry, I'm having a bit of trouble connecting. Could you try that again?",
         timestamp: new Date(),
       };
+      // If there's debug info, append it in a small font for the owner to see
+      if (error.debug) {
+        errorMessage.content += `\n\n[Debug: ${error.debug}]`;
+      }
       setMessages(prev => [...prev, errorMessage]);
     } finally {
       setIsLoading(false);

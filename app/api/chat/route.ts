@@ -3,14 +3,19 @@ import { SYSTEM_PROMPT } from "@/lib/chat-types";
 import { getFlightPrice } from "@/lib/flights/prices";
 import { CRUISE_PORT_MAP } from "@/lib/flights/ports";
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
-const model = genAI.getGenerativeModel({ 
-  model: "gemini-flash-latest",
-  systemInstruction: SYSTEM_PROMPT 
-});
-
 export async function POST(req: Request) {
   try {
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (!apiKey) {
+      throw new Error("GEMINI_API_KEY is missing in environment variables.");
+    }
+
+    const genAI = new GoogleGenerativeAI(apiKey);
+    const model = genAI.getGenerativeModel({ 
+      model: "gemini-flash-latest",
+      systemInstruction: SYSTEM_PROMPT 
+    });
+
     const body = await req.json();
     const { messages, recommendations, preferredAirport: passedAirport } = body;
 
@@ -81,7 +86,10 @@ export async function POST(req: Request) {
       }
 
       // Try the 1.5-flash model as a backup
-      const fallbackModel = genAI.getGenerativeModel({ model: "gemini-1.5-flash", systemInstruction: SYSTEM_PROMPT });
+      const fallbackModel = genAI.getGenerativeModel({ 
+        model: "gemini-1.5-flash", 
+        systemInstruction: SYSTEM_PROMPT 
+      });
       result = await fallbackModel.generateContent({ contents });
     }
     

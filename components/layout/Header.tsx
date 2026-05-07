@@ -102,12 +102,19 @@ const Header = () => {
           </div>
           <div className="pt-4 border-t border-gray-50">
             <p className="text-text-light text-[10px] uppercase tracking-[0.2em] font-bold mb-6">Cruise Lines</p>
-            <div className="grid grid-cols-1 gap-4 pl-0">
-              <Link href="/cruise-lines/royal-caribbean" onClick={() => setIsMenuOpen(false)} className="hover:text-accent text-primary">Royal Caribbean</Link>
-              <Link href="/cruise-lines/pando" onClick={() => setIsMenuOpen(false)} className="hover:text-accent text-primary">P&O Cruises</Link>
-              <Link href="/cruise-lines/msc" onClick={() => setIsMenuOpen(false)} className="hover:text-accent text-primary">MSC Cruises</Link>
-              <Link href="/cruise-lines/celebrity" onClick={() => setIsMenuOpen(false)} className="hover:text-accent text-primary">Celebrity Cruises</Link>
-              <Link href="/cruise-lines/princess" onClick={() => setIsMenuOpen(false)} className="hover:text-accent text-primary">Princess Cruises</Link>
+            <div className="grid grid-cols-1 gap-6 pl-0">
+              {[
+                { name: 'Royal Caribbean', path: '/cruise-lines/royal-caribbean', fleet: '/cruise-lines/royal-caribbean/fleet' },
+                { name: 'P&O Cruises', path: '/cruise-lines/pando', fleet: '/cruise-lines/pando/fleet' },
+                { name: 'MSC Cruises', path: '/cruise-lines/msc', fleet: '/cruise-lines/msc/fleet' },
+                { name: 'Celebrity Cruises', path: '/cruise-lines/celebrity', fleet: '/cruise-lines/celebrity/fleet' },
+                { name: 'Princess Cruises', path: '/cruise-lines/princess', fleet: '/cruise-lines/princess/fleet' },
+              ].map((line) => (
+                <div key={line.name} className="flex items-center justify-between">
+                  <Link href={line.path} onClick={() => setIsMenuOpen(false)} className="hover:text-accent text-primary font-bold">{line.name}</Link>
+                  <Link href={line.fleet} onClick={() => setIsMenuOpen(false)} className="text-[10px] font-bold uppercase tracking-widest bg-primary text-white px-3 py-1 rounded-full">Fleet Guide</Link>
+                </div>
+              ))}
             </div>
           </div>
           <div className="border-t border-gray-50 pt-8 flex flex-col space-y-6">
