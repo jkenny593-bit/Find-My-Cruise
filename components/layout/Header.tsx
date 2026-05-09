@@ -45,6 +45,7 @@ const Header = () => {
               <div className="grid grid-cols-1 divide-y divide-gray-50">
                 {[
                   { name: 'Royal Caribbean', path: '/cruise-lines/royal-caribbean', fleet: '/cruise-lines/royal-caribbean/fleet' },
+                  { name: 'Norwegian Cruise Line', path: '/cruise-lines/ncl', fleet: '/cruise-lines/ncl/fleet' },
                   { name: 'P&O Cruises', path: '/cruise-lines/pando', fleet: '/cruise-lines/pando/fleet' },
                   { name: 'MSC Cruises', path: '/cruise-lines/msc', fleet: '/cruise-lines/msc/fleet' },
                   { name: 'Celebrity Cruises', path: '/cruise-lines/celebrity', fleet: '/cruise-lines/celebrity/fleet' },
@@ -105,6 +106,7 @@ const Header = () => {
             <div className="grid grid-cols-1 gap-6 pl-0">
               {[
                 { name: 'Royal Caribbean', path: '/cruise-lines/royal-caribbean', fleet: '/cruise-lines/royal-caribbean/fleet' },
+                { name: 'Norwegian Cruise Line', path: '/cruise-lines/ncl', fleet: '/cruise-lines/ncl/fleet' },
                 { name: 'P&O Cruises', path: '/cruise-lines/pando', fleet: '/cruise-lines/pando/fleet' },
                 { name: 'MSC Cruises', path: '/cruise-lines/msc', fleet: '/cruise-lines/msc/fleet' },
                 { name: 'Celebrity Cruises', path: '/cruise-lines/celebrity', fleet: '/cruise-lines/celebrity/fleet' },
