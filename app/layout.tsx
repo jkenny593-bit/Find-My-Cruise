@@ -17,19 +17,22 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://findmycruise.ie'),
+  metadataBase: new URL('https://www.findmycruise.ie'),
   title: {
     default: "FindMyCruise.ie | AI Cruise Finder for Irish Travellers",
     template: "%s | FindMyCruise.ie"
   },
   description: "Find your perfect cruise holiday with Mara, our Irish-focused AI cruise specialist. Personalized recommendations from Dublin, Cork, Shannon, and Belfast.",
   alternates: {
-    canonical: '/',
+    canonical: './',
   },
   openGraph: {
-    title: "FindMyCruise.ie | AI Cruise Finder for Irish Travellers",
+    title: {
+      default: "FindMyCruise.ie | AI Cruise Finder for Irish Travellers",
+      template: "%s | FindMyCruise.ie"
+    },
     description: "Personalized cruise recommendations from Dublin, Cork, Shannon, and Belfast with our AI assistant Mara.",
-    url: 'https://findmycruise.ie',
+    url: './',
     siteName: 'FindMyCruise.ie',
     locale: 'en_IE',
     type: 'website',
@@ -77,12 +80,12 @@ export default function RootLayout({
               {
                 "@context": "https://schema.org",
                 "@type": "TravelAgency",
-                "@id": "https://findmycruise.ie/#agency",
+                "@id": "https://www.findmycruise.ie/#agency",
                 "name": "FindMyCruise.ie",
                 "description": "Ireland's premier AI-powered cruise search engine for personalized recommendations from Dublin, Cork, and Shannon.",
-                "url": "https://findmycruise.ie",
-                "logo": "https://findmycruise.ie/logo.png",
-                "image": "https://findmycruise.ie/logo.png",
+                "url": "https://www.findmycruise.ie",
+                "logo": "https://www.findmycruise.ie/logo.png",
+                "image": "https://www.findmycruise.ie/logo.png",
                 "priceRange": "€€",
                 "areaServed": {
                   "@type": "Country",
@@ -101,11 +104,16 @@ export default function RootLayout({
               {
                 "@context": "https://schema.org",
                 "@type": "WebSite",
-                "@id": "https://findmycruise.ie/#website",
-                "url": "https://findmycruise.ie",
+                "@id": "https://www.findmycruise.ie/#website",
+                "url": "https://www.findmycruise.ie",
                 "name": "FindMyCruise.ie",
                 "description": "AI-powered cruise finder for Irish travellers.",
-                "publisher": { "@id": "https://findmycruise.ie/#agency" }
+                "potentialAction": {
+                  "@type": "SearchAction",
+                  "target": "https://www.findmycruise.ie/find?q={search_term_string}",
+                  "query-input": "required name=search_term_string"
+                },
+                "publisher": { "@id": "https://www.findmycruise.ie/#agency" }
               }
             ])
           }}

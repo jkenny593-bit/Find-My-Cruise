@@ -1,0 +1,21 @@
+# FindMyCruise.ie — LLMs Context File
+
+## About
+FindMyCruise.ie is Ireland's AI-powered cruise discovery platform. We help Irish travellers find, compare, and book cruise holidays departing from Dublin, Cork, Shannon, and Belfast.
+
+## What We Do
+- AI-powered cruise recommendations tailored for Irish departure airports
+- Destination guides: Mediterranean, Caribbean, Norwegian Fjords, River Cruises, Family Cruises
+- Cruise line comparison: Royal Caribbean, MSC, Celebrity, P&O, Princess
+- Independent affiliate site — free advice, no hidden fees
+
+## Key Pages
+- Homepage: https://www.findmycruise.ie
+- Find a Cruise (AI tool): https://www.findmycruise.ie/find
+- Mediterranean cruises from Ireland: https://www.findmycruise.ie/destinations/mediterranean
+- Caribbean cruises from Ireland: https://www.findmycruise.ie/destinations/caribbean
+- Norwegian Fjords cruises from Ireland: https://www.findmycruise.ie/destinations/fjords
+- Journal/Blog: https://www.findmycruise.ie/blog
+
+## Audience
+Irish travellers planning cruise holidays, typically departing from Dublin Airport (DUB), Cork Airport (ORK), Shannon Airport (SNN), or Belfast International (BFS).

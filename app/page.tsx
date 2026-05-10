@@ -14,6 +14,22 @@ export const generateMetadata = (): Metadata => {
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
+      {/* Organization Schema for Homepage SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "FindMyCruise.ie",
+            "url": "https://www.findmycruise.ie",
+            "description": "Ireland's AI-powered cruise finder. Helping Irish travellers find the best cruise holidays from Dublin, Cork, Shannon, and Belfast.",
+            "areaServed": "Ireland",
+            "knowsAbout": ["Cruise Holidays", "Mediterranean Cruises", "Caribbean Cruises", "Norwegian Fjords Cruises"]
+          })
+        }}
+      />
+
       {/* Hero Section */}
       <section className="relative h-[85vh] flex items-center justify-center overflow-hidden bg-primary">
         {/* Modern Geometric Overlay */}
