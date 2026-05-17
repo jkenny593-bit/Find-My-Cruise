@@ -6,8 +6,20 @@ import { CRUISE_PORT_MAP } from "@/lib/flights/ports";
 export async function POST(req: Request) {
   try {
     const apiKey = process.env.GEMINI_API_KEY;
-    if (!apiKey) {
-      throw new Error("GEMINI_API_KEY is missing in environment variables.");
+    
+    // Masked log for debugging (only shows first 4 and last 4 chars)
+    if (apiKey) {
+      const maskedKey = `${apiKey.substring(0, 4)}...${apiKey.substring(apiKey.length - 4)}`;
+      console.log(`GEMINI_API_KEY detected: ${maskedKey}`);
+    } else {
+      console.error("GEMINI_API_KEY is completely missing from process.env");
+    }
+
+    if (!apiKey || apiKey.trim() === "") {
+      return Response.json({ 
+        error: "API Key Missing", 
+        debug: "The GEMINI_API_KEY is not set in .env.local. Mara cannot respond without an identity!" 
+      }, { status: 500 });
     }
 
     const genAI = new GoogleGenerativeAI(apiKey);
@@ -47,9 +59,9 @@ export async function POST(req: Request) {
 
     // If we have final recommendations, add the specific instructions for the end-game
     if (recommendations && recommendations.length > 0) {
-      flightContext += `INSTRUCTION: You have been given FLIGHT_CONTEXT showing indicative return flight prices. For each of the 3 cruise recommendations (Budget, Mid-range, Premium), add a 'Total Estimated Cost' line: cruise price per person + flight range per person. End with: 'Flight prices are indicative based on recent searches. Always check live fares before booking.'`;
+      flightContext += `INSTRUCTION: For each of the 3 cruise recommendations (Budget, Mid-range, Premium), add a 'Total Estimated Cost' line: cruise price per person + flight range per person. DO NOT use bolding or asterisks. ALWAYS end each recommendation with: 'Click to check availability and book directly with [cruise line]'. End the entire message with: 'Flight prices are indicative based on recent searches. Always check live fares before booking.'`;
     } else {
-      flightContext += `INSTRUCTION: Use the FLIGHT_CONTEXT above to provide travel tips and indicative costs during the conversation. If the user mentions a destination, tell them the flight range from ${preferredAirport} immediately.`;
+      flightContext += `INSTRUCTION: Use the FLIGHT_CONTEXT above to provide travel tips and indicative costs during the conversation. If the user mentions a destination, tell them the flight range from ${preferredAirport} immediately. DO NOT use bolding or asterisks.`;
     }
 
     // Format history for Gemini

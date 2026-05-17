@@ -1,7 +1,7 @@
 # FindMyCruise.ie — LLMs Context File
 
 ## About
-FindMyCruise.ie is Ireland's AI-powered cruise discovery platform. We help Irish travellers find, compare, and book cruise holidays departing from Dublin, Cork, Shannon, and Belfast.
+FindMyCruise.ie is Ireland's AI-powered cruise discovery platform. We help Irish travellers find, compare, and research cruise holidays departing from Dublin, Cork, Shannon, and Belfast. Click to book directly with the cruise line.
 
 ## What We Do
 - AI-powered cruise recommendations tailored for Irish departure airports

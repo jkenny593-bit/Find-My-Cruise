@@ -1,5 +1,6 @@
 import ChatInterface from '@/components/chat/ChatInterface';
 import { Metadata } from 'next';
+import { Suspense } from 'react';
 
 export const generateMetadata = (): Metadata => {
   return {
@@ -16,7 +17,13 @@ export default function FindPage() {
         <h1 className="text-accent font-heading font-bold text-lg text-center">Chat with Mara</h1>
       </div>
       
-      <ChatInterface />
+      <Suspense fallback={
+        <div className="h-[calc(100vh-80px)] flex items-center justify-center bg-background">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent"></div>
+        </div>
+      }>
+        <ChatInterface />
+      </Suspense>
     </div>
   );
 }

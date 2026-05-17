@@ -5,10 +5,11 @@ import { useState, useRef, useEffect } from 'react';
 interface ChatInputProps {
   onSend: (message: string) => void;
   disabled?: boolean;
+  input: string;
+  setInput: (value: string) => void;
 }
 
-const ChatInput = ({ onSend, disabled }: ChatInputProps) => {
-  const [input, setInput] = useState('');
+const ChatInput = ({ onSend, disabled, input, setInput }: ChatInputProps) => {
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
   const handleSubmit = (e?: React.FormEvent) => {

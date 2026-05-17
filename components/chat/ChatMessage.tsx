@@ -3,9 +3,11 @@ import CruiseCard from '../cruise/CruiseCard';
 
 interface ChatMessageProps {
   message: Message;
+  departureAirport?: string;
+  conversationId?: string;
 }
 
-const ChatMessage = ({ message }: ChatMessageProps) => {
+const ChatMessage = ({ message, departureAirport, conversationId }: ChatMessageProps) => {
   const isMara = message.role === 'assistant';
 
   return (
@@ -34,7 +36,12 @@ const ChatMessage = ({ message }: ChatMessageProps) => {
         <div className="mt-6 w-full max-w-[900px]">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {message.recommendations.map((cruise) => (
-              <CruiseCard key={cruise.id} cruise={cruise} />
+              <CruiseCard 
+                key={cruise.id} 
+                cruise={cruise} 
+                departureAirport={departureAirport}
+                conversationId={conversationId}
+              />
             ))}
           </div>
         </div>

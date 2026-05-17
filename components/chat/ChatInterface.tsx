@@ -6,20 +6,71 @@ import ChatMessage from './ChatMessage';
 import ChatInput from './ChatInput';
 import { getRecommendedCruises, CruiseOption } from '@/lib/widgety';
 import { trackEvent } from '@/components/layout/GoogleAnalytics';
+import { trackConversationEvent, startConversationTracking } from '@/lib/analytics/conversationTracker';
+
+import { useSearchParams } from 'next/navigation';
 
 const ChatInterface = () => {
+  const searchParams = useSearchParams();
+  const initialQueryProcessed = useRef(false);
+  const [conversationId, setConversationId] = useState<string>('');
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
       role: 'assistant',
-      content: "Dia dhuit! I'm Mara, your Irish cruise specialist. I'd love to help you find your dream voyage. To get started, tell me a bit about your ideal holiday—like where you'd love to go, when you're thinking of travelling, and who's coming along!",
+      content: "Dia dhuit! I'm Mara, your Irish cruise specialist. To find your perfect cruise, I just need a few details:\n\n1. How many are travelling (and any children's ages)?\n2. What month and year do you want to sail?\n3. What is your rough budget per person?\n4. Where would you love to go (or are you open to suggestions)?\n5. Which airport do you prefer: Dublin, Cork, or Shannon?",
       timestamp: new Date(),
     },
   ]);
+  const [input, setInput] = useState('');
   const [preferredAirport, setPreferredAirport] = useState<string>('DUB');
   const [isLoading, setIsLoading] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const inactivityTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Initialize Tracking
+  useEffect(() => {
+    const id = startConversationTracking();
+    setConversationId(id);
+
+    // Abandonment Tracker: If they close the tab before finishing
+    const handleBeforeUnload = () => {
+      // We only track abandonment if they haven't reached the recommendations phase
+      // Note: This is an approximation since fetch might be cancelled on unload
+      // but 'keepalive: true' in the tracker helps.
+      if (!isFinished) {
+        trackConversationEvent(id, 'chat_abandoned', { last_message_count: messages.length });
+      }
+    };
+    
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+  }, [isFinished, messages.length]);
+
+  // Handle initial query from Hero Search Widget
+  useEffect(() => {
+    const query = searchParams.get('q');
+    if (query && !initialQueryProcessed.current && messages.length === 1) {
+      initialQueryProcessed.current = true;
+      handleSendMessage(query);
+    }
+  }, [searchParams]);
+
+  const quickReplies = [
+    'Mediterranean',
+    'Caribbean',
+    'Norwegian Fjords',
+    'Family Cruise',
+    'Surprise Me'
+  ];
+
+  const handleQuickReply = (reply: string) => {
+    setInput(prev => {
+      const trimmed = prev.trim();
+      return trimmed ? `${trimmed} ${reply}` : reply;
+    });
+  };
 
   // Auto-scroll to bottom
   useEffect(() => {
@@ -27,6 +78,26 @@ const ChatInterface = () => {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [messages, isLoading]);
+
+  // Re-engagement logic for inactivity
+  useEffect(() => {
+    if (isFinished && !isLoading) {
+      if (inactivityTimerRef.current) clearTimeout(inactivityTimerRef.current);
+      inactivityTimerRef.current = setTimeout(() => {
+        const reEngagementMessage: Message = {
+          id: (Date.now() + 2).toString(),
+          role: 'assistant',
+          content: "Still there? I can refine these options for you or email them to you so you have them saved.",
+          timestamp: new Date(),
+        };
+        setMessages(prev => [...prev, reEngagementMessage]);
+        inactivityTimerRef.current = null;
+      }, 90000); // 90 seconds
+    }
+    return () => {
+      if (inactivityTimerRef.current) clearTimeout(inactivityTimerRef.current);
+    };
+  }, [isFinished, messages.length, isLoading]);
 
   // Helper to extract airport from messages
   const extractAirport = (msgs: Message[]) => {
@@ -51,6 +122,11 @@ const ChatInterface = () => {
   };
 
   const handleSendMessage = async (content: string) => {
+    if (inactivityTimerRef.current) {
+      clearTimeout(inactivityTimerRef.current);
+      inactivityTimerRef.current = null;
+    }
+
     const userMessage: Message = {
       id: Date.now().toString(),
       role: 'user',
@@ -60,6 +136,7 @@ const ChatInterface = () => {
     
     if (messages.length === 1) {
       trackEvent('chat_start', { first_message: content });
+      trackConversationEvent(conversationId, 'opening_completed', { first_input: content });
     }
 
     const updatedMessages = [...messages, userMessage];
@@ -67,37 +144,50 @@ const ChatInterface = () => {
     setIsLoading(true);
 
     try {
-      // THE NEW LOGIC: Mara decides when to show results
-      // We'll call the API first to see her natural response
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: updatedMessages }),
-      });
-
-      const data = await response.json();
-      if (data.error) {
-        const err = new Error(data.error) as any;
-        err.debug = data.debug;
-        throw err;
+      // 1. ATTEMPT FETCH
+      let response;
+      try {
+        response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ messages: updatedMessages }),
+        });
+      } catch (networkErr: any) {
+        throw { 
+          debug: `NETWORK FAILURE: Could not connect to /api/chat. ${networkErr.message || 'The server might be down.'}` 
+        };
       }
 
-      // If Mara says she's "searching" or "found options", we trigger the results
+      // 2. CHECK STATUS
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw { 
+          debug: `HTTP ERROR ${response.status}: ${errorData.debug || errorData.error || 'The server encountered an error.'}` 
+        };
+      }
+
+      // 3. PARSE DATA
+      const data = await response.json();
+      if (!data || !data.text) {
+        throw { debug: "EMPTY RESPONSE: The AI returned no text." };
+      }
+
+      // 4. PROCESS MARA RESPONSE
       const text = data.text.toLowerCase();
       const shouldTriggerResults = text.includes('searching') || 
-                                  text.includes('best options') || 
                                   text.includes('found three') ||
                                   content.toLowerCase().includes('show me');
 
       if (shouldTriggerResults && !isFinished) {
         trackEvent('chat_complete');
+        trackConversationEvent(conversationId, 'recommendations_shown');
+        
         const airport = extractAirport(updatedMessages);
         const region = extractRegion(updatedMessages);
         setPreferredAirport(airport);
 
         const results = await getRecommendedCruises({ region });
 
-        // Call API again with recommendations to get the final "Total Cost" response
         const finalResponse = await fetch('/api/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -108,15 +198,12 @@ const ChatInterface = () => {
           }),
         });
 
-        const finalData = await finalResponse.json();
-        
-        if (finalData.error) {
-          const err = new Error(finalData.error) as any;
-          err.debug = finalData.debug;
-          throw err;
+        if (!finalResponse.ok) {
+           const finalErrorData = await finalResponse.json().catch(() => ({}));
+           throw { debug: `RECOMMENDATION ERROR: ${finalErrorData.debug || 'Failed to generate final costs.'}` };
         }
-        if (!finalData.text) throw new Error("Mara didn't return a response. Try again?");
 
+        const finalData = await finalResponse.json();
         const maraMessage: Message = {
           id: (Date.now() + 1).toString(),
           role: 'assistant',
@@ -136,17 +223,21 @@ const ChatInterface = () => {
         setMessages(prev => [...prev, maraMessage]);
       }
     } catch (error: any) {
-      console.error('Chat error:', error);
+      console.error('ULTIMATE DEBUG LOG:', error);
+      
+      const debugMsg = error.debug || error.message || (typeof error === 'object' ? JSON.stringify(error) : String(error));
+      let displayMsg = "Mara is having a quick tea break. Try again in a second!";
+
+      if (debugMsg.includes('API Key Missing') || debugMsg.includes('403')) {
+        displayMsg = "It looks like your Gemini API Key is missing or invalid in .env.local.";
+      }
+
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: error.message || "I'm sorry, I'm having a bit of trouble connecting. Could you try that again?",
+        content: displayMsg + `\n\n[System Debug: ${debugMsg}]`,
         timestamp: new Date(),
       };
-      // If there's debug info, append it in a small font for the owner to see
-      if (error.debug) {
-        errorMessage.content += `\n\n[Debug: ${error.debug}]`;
-      }
       setMessages(prev => [...prev, errorMessage]);
     } finally {
       setIsLoading(false);
@@ -158,8 +249,28 @@ const ChatInterface = () => {
       <div ref={scrollRef} className="flex-grow overflow-y-auto p-4 md:p-8">
         <div className="max-w-[800px] mx-auto">
           {messages.map((msg) => (
-            <ChatMessage key={msg.id} message={msg} />
+            <ChatMessage 
+              key={msg.id} 
+              message={msg} 
+              departureAirport={preferredAirport === 'DUB' ? 'Dublin' : preferredAirport === 'ORK' ? 'Cork' : preferredAirport === 'SNN' ? 'Shannon' : 'Belfast'}
+              conversationId={conversationId}
+            />
           ))}
+          
+          {messages.length === 1 && !isLoading && (
+            <div className="flex flex-wrap gap-2 mb-6 ml-12">
+              {quickReplies.map((reply) => (
+                <button
+                  key={reply}
+                  onClick={() => handleQuickReply(reply)}
+                  className="px-4 py-2 bg-white border border-accent/20 rounded-full text-sm text-primary hover:bg-accent hover:text-white transition-all shadow-sm"
+                >
+                  {reply}
+                </button>
+              ))}
+            </div>
+          )}
+
           {isLoading && (
             <div className="flex justify-start mb-6">
               <div className="bg-white border border-gray-100 p-4 rounded-2xl rounded-tl-none shadow-sm flex items-center gap-2">
@@ -171,7 +282,12 @@ const ChatInterface = () => {
           )}
         </div>
       </div>
-      <ChatInput onSend={handleSendMessage} disabled={isLoading} />
+      <ChatInput 
+        onSend={handleSendMessage} 
+        disabled={isLoading} 
+        input={input}
+        setInput={setInput}
+      />
     </div>
   );
 };

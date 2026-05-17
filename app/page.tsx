@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import HeroSearchWidget from '@/components/ui/HeroSearchWidget';
 
 export const generateMetadata = (): Metadata => {
   return {
@@ -47,19 +48,8 @@ export default function Home() {
             Skip the generic search engines. Chat with Mara, our specialized AI, 
             to uncover hand-picked cruises tailored for your departure from Ireland.
           </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Link 
-              href="/find" 
-              className="bg-accent text-primary px-10 py-5 rounded-full font-bold text-lg hover:scale-105 transition-all shadow-2xl shadow-accent/20"
-            >
-              Consult with Mara
-            </Link>
-            <Link 
-              href="/blog" 
-              className="bg-white/5 backdrop-blur-md text-white border border-white/10 px-10 py-5 rounded-full font-bold text-lg hover:bg-white/10 transition-all"
-            >
-              Explore the Journal
-            </Link>
+          <div className="mt-8">
+            <HeroSearchWidget />
           </div>
         </div>
       </section>
