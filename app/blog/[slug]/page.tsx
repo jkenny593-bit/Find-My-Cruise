@@ -9,6 +9,7 @@ interface BlogPostProps {
 const POSTS_DATA: Record<string, any> = {
   'luxury-vs-budget-cruise-comparison': {
     title: 'Luxury vs. Budget: Which Cruise Line is Right for You?',
+    excerpt: 'We break down the real differences between premium lines like Celebrity and value lines like MSC to help you decide where to invest your holiday budget.',
     date: 'May 12, 2026',
     category: 'Comparison',
     image: 'https://images.unsplash.com/photo-1548574505-5e239809ee19?auto=format&fit=crop&q=80&w=1200',
@@ -32,6 +33,7 @@ const POSTS_DATA: Record<string, any> = {
   },
   'best-family-cruises-2026': {
     title: 'The Ultimate Guide to Family Cruising in 2026',
+    excerpt: "From waterparks to world-class kids' clubs, discover the top 3 cruise lines that Irish parents are booking for 2026.",
     date: 'May 11, 2026',
     category: 'Guides',
     image: 'https://images.unsplash.com/photo-1599640842225-85d111c60e6b?auto=format&fit=crop&q=80&w=1200',
@@ -53,6 +55,7 @@ const POSTS_DATA: Record<string, any> = {
   },
   'cruise-embarkation-day-tips': {
     title: '10 Essential Tips for a Stress-Free Embarkation Day',
+    excerpt: 'First time cruising? Our expert guide covers everything from luggage tags to boarding times to ensure a smooth start to your holiday.',
     date: 'May 10, 2026',
     category: 'Tips',
     image: 'https://images.unsplash.com/photo-1516132006923-6cf348e5dee2?auto=format&fit=crop&q=80&w=1200',
@@ -81,6 +84,19 @@ export async function generateMetadata({ params }: BlogPostProps): Promise<Metad
   return {
     title: `${post.title}`,
     description: post.excerpt,
+    alternates: {
+      canonical: `/blog/${slug}`,
+    },
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      url: `/blog/${slug}`,
+      images: [
+        {
+          url: post.image,
+        },
+      ],
+    },
   };
 }
 

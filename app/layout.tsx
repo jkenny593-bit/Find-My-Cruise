@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
   description: "Find your perfect cruise holiday with Mara, our Irish-focused AI cruise specialist. Personalized recommendations from Dublin, Cork, Shannon, and Belfast.",
   alternates: {
-    canonical: './',
+    canonical: '/',
   },
   openGraph: {
     title: {
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
       template: "%s | FindMyCruise.ie"
     },
     description: "Personalized cruise recommendations from Dublin, Cork, Shannon, and Belfast with our AI assistant Mara.",
-    url: './',
+    url: '/',
     siteName: 'FindMyCruise.ie',
     locale: 'en_IE',
     type: 'website',

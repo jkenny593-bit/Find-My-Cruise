@@ -5,6 +5,14 @@ export const generateMetadata = (): Metadata => {
   return {
     title: 'Cruise Insights & Planning Guides | FindMyCruise.ie',
     description: 'Expert advice and practical guides for Irish cruisers. Compare cruise lines, discover top destinations, and plan your perfect voyage.',
+    alternates: {
+      canonical: '/blog',
+    },
+    openGraph: {
+      title: 'Cruise Insights & Planning Guides',
+      description: 'Expert advice and practical guides for Irish cruisers. Compare cruise lines, discover top destinations, and plan your perfect voyage.',
+      url: '/blog',
+    },
   };
 };
 

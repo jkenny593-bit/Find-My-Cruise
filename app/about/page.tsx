@@ -8,6 +8,9 @@ export const generateMetadata = (): Metadata => {
     alternates: {
       canonical: '/about',
     },
+    openGraph: {
+      url: '/about',
+    },
   };
 };
 

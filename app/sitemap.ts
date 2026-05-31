@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://findmycruise.ie';
+  const baseUrl = 'https://www.findmycruise.ie';
   
   // List of all static routes
   const routes = [
@@ -17,6 +17,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/cruise-lines/royal-caribbean',
     '/cruise-lines/pando',
     '/cruise-lines/msc',
+    '/cruise-lines/celebrity',
+    '/cruise-lines/princess',
+    '/cruise-lines/ncl',
+    '/blog/luxury-vs-budget-cruise-comparison',
+    '/blog/best-family-cruises-2026',
+    '/blog/cruise-embarkation-day-tips',
   ];
 
   return routes.map((route) => ({

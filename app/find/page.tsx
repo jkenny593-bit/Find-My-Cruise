@@ -6,6 +6,14 @@ export const generateMetadata = (): Metadata => {
   return {
     title: 'Find a Cruise | Chat with Mara',
     description: 'Tell Mara your travel plans and get 3 personalized cruise recommendations from Ireland.',
+    alternates: {
+      canonical: '/find',
+    },
+    openGraph: {
+      title: 'Find a Cruise | Chat with Mara',
+      description: 'Tell Mara your travel plans and get 3 personalized cruise recommendations from Ireland.',
+      url: '/find',
+    },
   };
 };
 
