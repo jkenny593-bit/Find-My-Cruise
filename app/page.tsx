@@ -34,10 +34,17 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="relative h-[85vh] flex items-center justify-center overflow-hidden bg-primary">
-        {/* Modern Geometric Overlay */}
-        <div className="absolute inset-0 opacity-10 pointer-events-none">
-          <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(45deg,_transparent_25%,_rgba(255,255,255,0.1)_50%,_transparent_75%)] bg-[length:100px_100px]" />
-        </div>
+        {/* Full-bleed hero background photo */}
+        <Image
+          src="/hero-bg.png"
+          alt="Luxury cruise ship sailing at sunset"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center scale-105 animate-[slowZoom_20s_ease-in-out_infinite_alternate]"
+        />
+        {/* Dark navy gradient overlay so text stays readable over the photo */}
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/75 via-primary/60 to-primary/80" />
         
         <div className="relative z-10 max-w-[1200px] mx-auto px-6 text-center">
           <span className="text-accent font-bold tracking-[0.3em] uppercase text-xs mb-6 block animate-fade-in">Redefining Cruise Discovery</span>
@@ -112,16 +119,17 @@ export default function Home() {
             </Link>
           </div>
           
+          {/* Each destination uses an explicit href to avoid URL generation bugs */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { name: 'Mediterranean', img: 'https://images.unsplash.com/photo-1548574505-5e239809ee19?auto=format&fit=crop&q=80&w=800' },
-              { name: 'Caribbean', img: 'https://images.unsplash.com/photo-1599640842225-85d111c60e6b?auto=format&fit=crop&q=80&w=800' },
-              { name: 'Norwegian Fjords', img: 'https://images.unsplash.com/photo-1516132006923-6cf348e5dee2?auto=format&fit=crop&q=80&w=800' },
-              { name: 'River Cruises', img: '/river-cruise-featured.png' }
+              { name: 'Mediterranean', href: '/destinations/mediterranean', img: 'https://images.unsplash.com/photo-1548574505-5e239809ee19?auto=format&fit=crop&q=80&w=800' },
+              { name: 'Caribbean', href: '/destinations/caribbean', img: 'https://images.unsplash.com/photo-1599640842225-85d111c60e6b?auto=format&fit=crop&q=80&w=800' },
+              { name: 'Norwegian Fjords', href: '/destinations/fjords', img: 'https://images.unsplash.com/photo-1516132006923-6cf348e5dee2?auto=format&fit=crop&q=80&w=800' },
+              { name: 'River Cruises', href: '/destinations/river', img: '/river-cruise-featured.png' }
             ].map((dest, i) => (
               <Link 
                 key={i} 
-                href={`/destinations/${dest.name.toLowerCase().replace(' ', '-')}`}
+                href={dest.href}
                 className="group relative h-96 rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 bg-white"
               >
                 <Image 
@@ -137,6 +145,27 @@ export default function Home() {
                   <span className="text-accent text-xs font-bold uppercase tracking-widest group-hover:translate-x-2 transition-transform inline-block">Explore →</span>
                 </div>
               </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Trust Signals — builds confidence with new visitors before the final CTA */}
+      <section className="py-20 bg-white border-t border-gray-100">
+        <div className="max-w-[1200px] mx-auto px-6">
+          <p className="text-center text-text-light text-[10px] uppercase tracking-[0.25em] font-bold mb-12">Why Irish Travellers Trust Us</p>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { icon: '🇮🇪', title: 'Irish-Run', desc: 'Built specifically for travellers flying from Dublin, Cork, Shannon & Belfast.' },
+              { icon: '🤖', title: 'Powered by Google AI', desc: 'Mara uses the latest Google Gemini AI to find your perfect match.' },
+              { icon: '💸', title: 'Completely Free', desc: 'Our service costs you nothing. We earn a small commission from cruise lines when you book.' },
+              { icon: '🔒', title: 'No Data Stored', desc: 'We never store your personal details. Your chat is private and temporary.' },
+            ].map((item) => (
+              <div key={item.title} className="text-center p-6 rounded-2xl bg-surface">
+                <div className="text-4xl mb-4">{item.icon}</div>
+                <h3 className="font-bold text-primary text-sm mb-2">{item.title}</h3>
+                <p className="text-text-light text-xs leading-relaxed">{item.desc}</p>
+              </div>
             ))}
           </div>
         </div>

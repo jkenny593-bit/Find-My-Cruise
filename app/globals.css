@@ -41,3 +41,9 @@
     --foreground: #FFFFFF;
   }
 }
+
+/* Slow zoom animation for the hero background image */
+@keyframes slowZoom {
+  from { transform: scale(1.05); }
+  to   { transform: scale(1.12); }
+}

@@ -18,12 +18,16 @@ const ChatInterface = () => {
     {
       id: '1',
       role: 'assistant',
-      content: "Dia dhuit! I'm Mara, your Irish cruise specialist. ⚓\n\nI'd love to help you find your perfect voyage. Where are you thinking of heading, and how many are planning to sail?",
+      // Mara opens with a warm greeting and ONE question — not a list of 5.
+      // The system prompt handles gathering the rest one at a time.
+      content: "Dia dhuit! 👋 I'm Mara, your Irish cruise specialist. I'm here to find you the perfect cruise from Ireland — and it only takes a couple of minutes.\n\nTo kick things off: how many people will be travelling?",
       timestamp: new Date(),
     },
   ]);
   const [input, setInput] = useState('');
   const [preferredAirport, setPreferredAirport] = useState<string>('DUB');
+  const [email, setEmail] = useState<string>('');
+  const [isSubscribed, setIsSubscribed] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -121,10 +125,56 @@ const ChatInterface = () => {
     return undefined;
   };
 
+  const handleSubscribe = async (userEmail: string) => {
+    try {
+      const response = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          email: userEmail, 
+          conversationId,
+          recommendations: messages.find(m => m.recommendations)?.recommendations
+        }),
+      });
+      
+      if (response.ok) {
+        setIsSubscribed(true);
+        setEmail(userEmail);
+        trackEvent('email_capture', { email: userEmail });
+        
+        const successMessage: Message = {
+          id: Date.now().toString(),
+          role: 'assistant',
+          content: "Grand! I've saved your email and I'll send those cruise details over to you right away. ⚓",
+          timestamp: new Date(),
+        };
+        setMessages(prev => [...prev, successMessage]);
+      }
+    } catch (err) {
+      console.error('Subscription error:', err);
+    }
+  };
+
   const handleSendMessage = async (content: string) => {
     if (inactivityTimerRef.current) {
       clearTimeout(inactivityTimerRef.current);
       inactivityTimerRef.current = null;
+    }
+
+    // Email Detection Logic
+    const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g;
+    const foundEmails = content.match(emailRegex);
+    
+    if (foundEmails && !isSubscribed) {
+      const userMessage: Message = {
+        id: Date.now().toString(),
+        role: 'user',
+        content,
+        timestamp: new Date(),
+      };
+      setMessages(prev => [...prev, userMessage]);
+      handleSubscribe(foundEmails[0]);
+      return;
     }
 
     const userMessage: Message = {
@@ -225,19 +275,26 @@ const ChatInterface = () => {
         setMessages(prev => [...prev, maraMessage]);
       }
     } catch (error: any) {
+      // Log the full debug info to the server console (only you can see this)
       console.error('ULTIMATE DEBUG LOG:', error);
       
+      // Extract debug message for internal error-type detection only — never shown to users
       const debugMsg = error.debug || error.message || (typeof error === 'object' ? JSON.stringify(error) : String(error));
-      let displayMsg = "Mara is having a quick tea break. Try again in a second!";
+      
+      // Show users a friendly message — never show raw debug/system info
+      let displayMsg = "Mara is having a quick tea break ☕ — try again in a second!";
 
       if (debugMsg.includes('API Key Missing') || debugMsg.includes('403')) {
-        displayMsg = "It looks like your Gemini API Key is missing or invalid in .env.local.";
+        displayMsg = "There seems to be a configuration issue on our end. Please try again in a moment.";
+      } else if (debugMsg.includes('429') || debugMsg.toLowerCase().includes('quota')) {
+        displayMsg = "We're very popular right now! 😊 Give it a minute and try again.";
       }
 
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: displayMsg + `\n\n[System Debug: ${debugMsg}]`,
+        // Only the friendly message — no debug info shown to users
+        content: displayMsg,
         timestamp: new Date(),
       };
       setMessages(prev => [...prev, errorMessage]);
