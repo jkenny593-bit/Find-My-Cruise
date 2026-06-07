@@ -39,10 +39,10 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/logo.svg',
-        width: 512,
-        height: 512,
-        alt: 'FindMyCruise.ie Logo',
+        url: '/og-image.png',
+        width: 1024,
+        height: 1024,
+        alt: 'FindMyCruise.ie — AI Cruise Finder for Irish Travellers',
       }
     ],
   },
@@ -94,8 +94,8 @@ export default function RootLayout({
                 "name": "FindMyCruise.ie",
                 "description": "Ireland's premier AI-powered cruise search engine for personalized recommendations from Dublin, Cork, and Shannon.",
                 "url": "https://www.findmycruise.ie",
-                "logo": "https://www.findmycruise.ie/logo.svg",
-                "image": "https://www.findmycruise.ie/logo.svg",
+                "logo": "https://www.findmycruise.ie/logo.png",
+                "image": "https://www.findmycruise.ie/og-image.png",
                 "priceRange": "€€",
                 "areaServed": {
                   "@type": "Country",

@@ -12,10 +12,10 @@ const Header = () => {
       <div className="max-w-[1200px] mx-auto px-6 h-20 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3">
-          <div className="relative w-10 h-10 rounded-xl overflow-hidden shadow-sm">
+          <div className="relative w-11 h-11 rounded-xl overflow-hidden shadow-sm flex-shrink-0">
             <Image 
-              src="/logo.svg" 
-              alt="FindMyCruise Logo" 
+              src="/logo.png" 
+              alt="FindMyCruise.ie Logo" 
               fill
               className="object-cover"
             />
