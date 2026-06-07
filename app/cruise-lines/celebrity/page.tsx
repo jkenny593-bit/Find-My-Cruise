@@ -3,16 +3,20 @@ import { MOCK_CRUISES } from '@/lib/widgety';
 import CruiseGrid from '@/components/cruise/CruiseGrid';
 
 export const generateMetadata = (): Metadata => {
+  const title = 'Celebrity Cruises Ireland — Modern Luxury & Prices | FindMyCruise.ie';
+  const description = 'Celebrity Cruises offers "Modern Luxury" fly-cruises from Dublin, typically costing €1,350–€3,500 per person. Known for Michelin-starred dining and sophisticated design.';
+  const url = 'https://www.findmycruise.ie/cruise-lines/celebrity';
+
   return {
-    title: 'Celebrity Cruises Ireland — Modern Luxury & Prices | FindMyCruise.ie',
-    description: 'Celebrity Cruises offers "Modern Luxury" fly-cruises from Dublin, typically costing €1,350–€3,500 per person. Known for Michelin-starred dining and sophisticated design.',
+    title,
+    description,
     alternates: {
-      canonical: '/cruise-lines/celebrity',
+      canonical: url,
     },
     openGraph: {
-      title: 'Celebrity Cruises Ireland — Modern Luxury & Prices',
-      description: 'Discover the best Celebrity Cruises deals from Ireland. Expert advice on "Always Included" packages, gourmet dining, and direct flights from Dublin.',
-      url: '/cruise-lines/celebrity',
+      title,
+      description,
+      url,
     }
   };
 };

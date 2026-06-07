@@ -18,7 +18,7 @@ const ChatInterface = () => {
     {
       id: '1',
       role: 'assistant',
-      content: "Dia dhuit! I'm Mara, your Irish cruise specialist. To find your perfect cruise, I just need a few details:\n\n1. How many are travelling (and any children's ages)?\n2. What month and year do you want to sail?\n3. What is your rough budget per person?\n4. Where would you love to go (or are you open to suggestions)?\n5. Which airport do you prefer: Dublin, Cork, or Shannon?",
+      content: "Dia dhuit! I'm Mara, your Irish cruise specialist. ⚓\n\nI'd love to help you find your perfect voyage. Where are you thinking of heading, and how many are planning to sail?",
       timestamp: new Date(),
     },
   ]);
@@ -174,8 +174,10 @@ const ChatInterface = () => {
 
       // 4. PROCESS MARA RESPONSE
       const text = data.text.toLowerCase();
-      const shouldTriggerResults = text.includes('searching') || 
+      const shouldTriggerResults = text.includes('found three great cruise options') || 
+                                  text.includes('searching') || 
                                   text.includes('found three') ||
+                                  text.includes('recommendations') ||
                                   content.toLowerCase().includes('show me');
 
       if (shouldTriggerResults && !isFinished) {

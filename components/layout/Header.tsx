@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
 
 const Header = () => {
@@ -10,8 +11,18 @@ const Header = () => {
     <header className="bg-white text-primary sticky top-0 z-50 border-b border-gray-100 backdrop-blur-md bg-white/90">
       <div className="max-w-[1200px] mx-auto px-6 h-20 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="text-xl md:text-2xl font-heading font-bold tracking-tight">
-          FindMyCruise<span className="text-accent">.ie</span>
+        <Link href="/" className="flex items-center gap-3">
+          <div className="relative w-10 h-10 rounded-xl overflow-hidden shadow-sm">
+            <Image 
+              src="/logo.svg" 
+              alt="FindMyCruise Logo" 
+              fill
+              className="object-cover"
+            />
+          </div>
+          <span className="text-xl md:text-2xl font-heading font-bold tracking-tight">
+            FindMyCruise<span className="text-accent">.ie</span>
+          </span>
         </Link>
         
         {/* Desktop Navigation */}

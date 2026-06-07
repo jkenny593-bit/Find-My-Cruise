@@ -3,16 +3,20 @@ import { MOCK_CRUISES } from '@/lib/widgety';
 import CruiseGrid from '@/components/cruise/CruiseGrid';
 
 export const generateMetadata = (): Metadata => {
+  const title = 'MSC Cruises Ireland — Best Deals, Prices & Reviews | FindMyCruise.ie';
+  const description = 'MSC Cruises offers the best value fly-cruises from Dublin and Cork, typically costing €649–€1,850 per person. Known for Kids Sail Free and baby-friendly clubs.';
+  const url = 'https://www.findmycruise.ie/cruise-lines/msc';
+
   return {
-    title: 'MSC Cruises Ireland — Best Deals, Prices & Reviews | FindMyCruise.ie',
-    description: 'MSC Cruises offers the best value fly-cruises from Dublin and Cork, typically costing €649–€1,850 per person. Known for Kids Sail Free and baby-friendly clubs.',
+    title,
+    description,
     alternates: {
-      canonical: '/cruise-lines/msc',
+      canonical: url,
     },
     openGraph: {
-      title: 'MSC Cruises Ireland — Best Deals, Prices & Reviews',
-      description: 'Discover the best MSC Cruises deals from Ireland. Expert advice on Mediterranean fly-cruises, family deals, and the MSC Baby Club.',
-      url: '/cruise-lines/msc',
+      title,
+      description,
+      url,
     }
   };
 };

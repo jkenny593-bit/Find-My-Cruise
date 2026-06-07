@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import HeroSearchWidget from '@/components/ui/HeroSearchWidget';
 
 export const generateMetadata = (): Metadata => {
@@ -7,7 +8,7 @@ export const generateMetadata = (): Metadata => {
     title: "FindMyCruise.ie | AI Cruise Finder for Irish Travellers",
     description: "Find your perfect cruise holiday with Mara, our Irish-focused AI cruise specialist. Personalized recommendations from Dublin, Cork, Shannon, and Belfast.",
     alternates: {
-      canonical: '/',
+      canonical: 'https://www.findmycruise.ie/',
     },
   };
 };
@@ -41,8 +42,8 @@ export default function Home() {
         <div className="relative z-10 max-w-[1200px] mx-auto px-6 text-center">
           <span className="text-accent font-bold tracking-[0.3em] uppercase text-xs mb-6 block animate-fade-in">Redefining Cruise Discovery</span>
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold text-white mb-8 leading-[1.1] tracking-tight">
-            The Intelligent Way <br className="hidden md:block" />
-            <span className="text-accent italic font-normal">to Find Your Voyage</span>
+            AI-Powered <br className="hidden md:block" />
+            <span className="text-accent italic font-normal">Cruises from Ireland</span>
           </h1>
           <p className="text-lg md:text-xl text-white/70 mb-12 max-w-2xl mx-auto leading-relaxed font-light">
             Skip the generic search engines. Chat with Mara, our specialized AI, 
@@ -123,7 +124,13 @@ export default function Home() {
                 href={`/destinations/${dest.name.toLowerCase().replace(' ', '-')}`}
                 className="group relative h-96 rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 bg-white"
               >
-                <img src={dest.img} alt={dest.name} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                <Image 
+                  src={dest.img} 
+                  alt={`${dest.name} cruise from Ireland`}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  className="object-cover group-hover:scale-110 transition-transform duration-700" 
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent opacity-60" />
                 <div className="absolute bottom-8 left-8">
                   <h3 className="text-2xl font-heading font-bold text-white mb-2">{dest.name}</h3>

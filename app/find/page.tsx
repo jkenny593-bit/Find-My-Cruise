@@ -7,7 +7,7 @@ export const generateMetadata = (): Metadata => {
     title: 'Find a Cruise | Chat with Mara',
     description: 'Tell Mara your travel plans and get 3 personalized cruise recommendations from Ireland.',
     alternates: {
-      canonical: '/find',
+      canonical: 'https://www.findmycruise.ie/find',
     },
     openGraph: {
       title: 'Find a Cruise | Chat with Mara',

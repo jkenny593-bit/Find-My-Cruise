@@ -7,12 +7,12 @@ export const generateMetadata = (): Metadata => {
     title: 'Princess Cruises Ireland — Deals, Ships & Prices | FindMyCruise.ie',
     description: 'Princess Cruises offers "MedallionClass" fly-cruises from Dublin, typically costing €999–€2,850 per person. Known for multi-generational travel and premium service.',
     alternates: {
-      canonical: '/cruise-lines/princess',
+      canonical: 'https://www.findmycruise.ie/cruise-lines/princess',
     },
     openGraph: {
       title: 'Princess Cruises Ireland — Deals, Ships & Prices',
       description: 'Find the best Princess Cruises deals from Ireland. Expert advice on MedallionClass technology, Caribbean fly-cruises, and family-friendly amenities.',
-      url: '/cruise-lines/princess',
+      url: 'https://www.findmycruise.ie/cruise-lines/princess',
     }
   };
 };

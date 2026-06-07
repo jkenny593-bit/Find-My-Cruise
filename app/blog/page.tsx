@@ -6,7 +6,7 @@ export const generateMetadata = (): Metadata => {
     title: 'Cruise Insights & Planning Guides | FindMyCruise.ie',
     description: 'Expert advice and practical guides for Irish cruisers. Compare cruise lines, discover top destinations, and plan your perfect voyage.',
     alternates: {
-      canonical: '/blog',
+      canonical: 'https://www.findmycruise.ie/blog',
     },
     openGraph: {
       title: 'Cruise Insights & Planning Guides',
@@ -17,6 +17,14 @@ export const generateMetadata = (): Metadata => {
 };
 
 const POSTS = [
+  {
+    slug: 'best-cruise-lines-ireland-ranked',
+    title: 'Best Cruise Lines from Ireland in 2026: Ranked for Irish Travellers',
+    excerpt: 'We rank the top 5 cruise lines for Irish holidaymakers in 2026 based on pricing, flight connectivity from Dublin and Cork, onboard quality, and overall value.',
+    date: 'May 31, 2026',
+    category: 'Rankings',
+    image: 'https://images.unsplash.com/photo-1548574505-5e239809ee19?auto=format&fit=crop&q=80&w=800',
+  },
   {
     slug: 'luxury-vs-budget-cruise-comparison',
     title: 'Luxury vs. Budget: Which Cruise Line is Right for You?',

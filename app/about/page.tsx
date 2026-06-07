@@ -6,10 +6,10 @@ export const generateMetadata = (): Metadata => {
     title: 'About FindMyCruise.ie — Ireland\'s AI Cruise Specialists',
     description: 'Learn how FindMyCruise.ie helps Irish travellers find the best cruise deals from Dublin and Cork. Independent advice, powered by AI and local expertise.',
     alternates: {
-      canonical: '/about',
+      canonical: 'https://www.findmycruise.ie/about',
     },
     openGraph: {
-      url: '/about',
+      url: 'https://www.findmycruise.ie/about',
     },
   };
 };

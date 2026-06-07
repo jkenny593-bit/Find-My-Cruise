@@ -3,16 +3,20 @@ import { MOCK_CRUISES } from '@/lib/widgety';
 import CruiseGrid from '@/components/cruise/CruiseGrid';
 
 export const generateMetadata = (): Metadata => {
+  const title = 'P&O Cruises Ireland — Best Deals & Prices 2026 | FindMyCruise.ie';
+  const description = 'P&O Cruises offers "British at Sea" fly-cruises from Dublin, typically costing €750–€1,950 per person. Known for direct Barbados charters and no tipping.';
+  const url = 'https://www.findmycruise.ie/cruise-lines/pando';
+
   return {
-    title: 'P&O Cruises Ireland — Best Deals & Prices 2026 | FindMyCruise.ie',
-    description: 'P&O Cruises offers "British at Sea" fly-cruises from Dublin, typically costing €750–€1,950 per person. Known for direct Barbados charters and no tipping.',
+    title,
+    description,
     alternates: {
-      canonical: '/cruise-lines/pando',
+      canonical: url,
     },
     openGraph: {
-      title: 'P&O Cruises Ireland — Best Deals & Prices 2026',
-      description: 'Find the best P&O deals from Ireland. Expert advice on Barbados winter charters, Mediterranean sailings, and their "British at Sea" service.',
-      url: '/cruise-lines/pando',
+      title,
+      description,
+      url,
     }
   };
 };

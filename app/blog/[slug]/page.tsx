@@ -7,6 +7,83 @@ interface BlogPostProps {
 }
 
 const POSTS_DATA: Record<string, any> = {
+  'best-cruise-lines-ireland-ranked': {
+    title: 'Best Cruise Lines from Ireland in 2026: Ranked for Irish Travellers',
+    excerpt: 'We rank the top 5 cruise lines for Irish holidaymakers in 2026 based on pricing, flight connectivity from Dublin and Cork, onboard quality, and overall value.',
+    date: 'May 31, 2026',
+    category: 'Rankings',
+    image: 'https://images.unsplash.com/photo-1548574505-5e239809ee19?auto=format&fit=crop&q=80&w=1200',
+    content: `
+      <p class="lead">For Irish travellers, the best cruise lines in 2026 are <strong>MSC Cruises</strong> for value, <strong>Royal Caribbean</strong> for family entertainment, and <strong>Celebrity Cruises</strong> for modern luxury. These rankings are based on direct flight connectivity from Dublin and Cork, pricing in Euro, and overall ship quality.</p>
+      
+      <p>Choosing a cruise is a significant investment, and for those flying from Ireland, the "fly-cruise" logistics are just as important as the ship itself. In this guide, we break down the top 5 lines serving the Irish market this year.</p>
+
+      <h3>Comparison Table: Top 5 Cruise Lines for Ireland</h3>
+      <div class="overflow-x-auto my-10">
+        <table class="w-full text-sm text-left border-collapse border border-gray-200">
+          <thead>
+            <tr class="bg-primary text-white">
+              <th class="p-4 border border-gray-200">Cruise Line</th>
+              <th class="p-4 border border-gray-200">Best For</th>
+              <th class="p-4 border border-gray-200">Flights</th>
+              <th class="p-4 border border-gray-200">Price Range</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="p-4 border border-gray-200 font-bold">MSC Cruises</td>
+              <td class="p-4 border border-gray-200">Budget & Families</td>
+              <td class="p-4 border border-gray-200">Dublin, Cork, Shannon</td>
+              <td class="p-4 border border-gray-200">€€</td>
+            </tr>
+            <tr class="bg-surface">
+              <td class="p-4 border border-gray-200 font-bold">Royal Caribbean</td>
+              <td class="p-4 border border-gray-200">Teens & Activities</td>
+              <td class="p-4 border border-gray-200">Dublin, Shannon</td>
+              <td class="p-4 border border-gray-200">€€€</td>
+            </tr>
+            <tr>
+              <td class="p-4 border border-gray-200 font-bold">Celebrity Cruises</td>
+              <td class="p-4 border border-gray-200">Modern Luxury</td>
+              <td class="p-4 border border-gray-200">Dublin</td>
+              <td class="p-4 border border-gray-200">€€€€</td>
+            </tr>
+            <tr class="bg-surface">
+              <td class="p-4 border border-gray-200 font-bold">P&O Cruises</td>
+              <td class="p-4 border border-gray-200">British Atmosphere</td>
+              <td class="p-4 border border-gray-200">Dublin (via LHR)</td>
+              <td class="p-4 border border-gray-200">€€</td>
+            </tr>
+            <tr>
+              <td class="p-4 border border-gray-200 font-bold">Princess Cruises</td>
+              <td class="p-4 border border-gray-200">Couples</td>
+              <td class="p-4 border border-gray-200">Dublin</td>
+              <td class="p-4 border border-gray-200">€€€</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>1. MSC Cruises: The Value King</h3>
+      <p>MSC remains the most popular choice for Irish families, largely due to their "Kids Sail Free" promotions and their aggressive expansion in the Mediterranean. With newer ships like the <em>MSC World Europa</em>, they offer a futuristic experience that rivals much more expensive lines.</p>
+      <ul>
+        <li><strong>Pros:</strong> Excellent value, stunning Swarovski staircases, great for kids.</li>
+        <li><strong>Cons:</strong> Can feel crowded during peak season, some extra costs for theme restaurants.</li>
+      </ul>
+
+      <h3>2. Royal Caribbean: Ultimate Entertainment</h3>
+      <p>If you have teenagers, Royal Caribbean is unbeatable. Their ships are essentially floating theme parks with flow-riders, rock climbing walls, and even skydiving simulators. They have strong flight connections from Dublin to Barcelona and Rome.</p>
+
+      <h3>3. Celebrity Cruises: For the Sophisticated Traveller</h3>
+      <p>Celebrity's "Edge-class" ships have revolutionized cruise ship design. The Magic Carpet—a platform that moves between decks—is a must-see. It’s perfect for Irish couples looking for a child-free atmosphere without going to a strictly adults-only line.</p>
+
+      <h3>4. P&O Cruises: A Home Away from Home</h3>
+      <p>P&O offers a familiar, British-style service that many Irish cruisers appreciate. One of the biggest perks is that gratuities are included in the price, so there are no surprise charges at the end of the holiday.</p>
+
+      <h3>5. Princess Cruises: The Destination Experts</h3>
+      <p>Princess is ideal for those who care more about the ports than the onboard waterslides. Their "Medallion" technology makes the experience incredibly smooth, allowing you to order a drink to exactly where you are sitting on the ship using your phone.</p>
+    `,
+  },
   'luxury-vs-budget-cruise-comparison': {
     title: 'Luxury vs. Budget: Which Cruise Line is Right for You?',
     excerpt: 'We break down the real differences between premium lines like Celebrity and value lines like MSC to help you decide where to invest your holiday budget.',
@@ -85,12 +162,12 @@ export async function generateMetadata({ params }: BlogPostProps): Promise<Metad
     title: `${post.title}`,
     description: post.excerpt,
     alternates: {
-      canonical: `/blog/${slug}`,
+      canonical: `https://www.findmycruise.ie/blog/${slug}`,
     },
     openGraph: {
       title: post.title,
       description: post.excerpt,
-      url: `/blog/${slug}`,
+      url: `https://www.findmycruise.ie/blog/${slug}`,
       images: [
         {
           url: post.image,

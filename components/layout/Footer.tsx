@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -8,8 +9,18 @@ const Footer = () => {
       <div className="max-w-[1200px] mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-16">
         {/* Brand Column */}
         <div className="space-y-6">
-          <Link href="/" className="text-2xl font-heading font-bold tracking-tight text-primary">
-            FindMyCruise<span className="text-accent">.ie</span>
+          <Link href="/" className="flex items-center gap-3">
+            <div className="relative w-8 h-8 rounded-lg overflow-hidden shadow-sm">
+              <Image 
+                src="/logo.svg" 
+                alt="FindMyCruise Logo" 
+                fill
+                className="object-cover"
+              />
+            </div>
+            <span className="text-2xl font-heading font-bold tracking-tight text-primary">
+              FindMyCruise<span className="text-accent">.ie</span>
+            </span>
           </Link>
           <p className="text-sm text-text-light leading-relaxed font-light">
             Ireland's specialized AI cruise discovery platform. We simplify the search process for the modern traveller.

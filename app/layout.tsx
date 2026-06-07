@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import GoogleAnalytics from "@/components/layout/GoogleAnalytics";
+import Breadcrumbs from "@/components/layout/Breadcrumbs";
 import Script from "next/script";
 
 const inter = Inter({
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
   },
   description: "Find your perfect cruise holiday with Mara, our Irish-focused AI cruise specialist. Personalized recommendations from Dublin, Cork, Shannon, and Belfast.",
   alternates: {
-    canonical: '/',
+    canonical: 'https://www.findmycruise.ie/',
   },
   openGraph: {
     title: {
@@ -36,6 +37,14 @@ export const metadata: Metadata = {
     siteName: 'FindMyCruise.ie',
     locale: 'en_IE',
     type: 'website',
+    images: [
+      {
+        url: '/logo.svg',
+        width: 512,
+        height: 512,
+        alt: 'FindMyCruise.ie Logo',
+      }
+    ],
   },
   twitter: {
     card: 'summary_large_image',
@@ -58,6 +67,7 @@ export default function RootLayout({
       <body className="bg-background text-text min-h-screen flex flex-col">
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || ""} />
         <Header />
+        <Breadcrumbs />
         <main className="flex-grow">
           {children}
         </main>
@@ -84,8 +94,8 @@ export default function RootLayout({
                 "name": "FindMyCruise.ie",
                 "description": "Ireland's premier AI-powered cruise search engine for personalized recommendations from Dublin, Cork, and Shannon.",
                 "url": "https://www.findmycruise.ie",
-                "logo": "https://www.findmycruise.ie/logo.png",
-                "image": "https://www.findmycruise.ie/logo.png",
+                "logo": "https://www.findmycruise.ie/logo.svg",
+                "image": "https://www.findmycruise.ie/logo.svg",
                 "priceRange": "€€",
                 "areaServed": {
                   "@type": "Country",
@@ -94,7 +104,14 @@ export default function RootLayout({
                 "serviceType": "Cruise Recommendation",
                 "address": {
                   "@type": "PostalAddress",
+                  "addressLocality": "Dublin",
+                  "addressRegion": "Co. Dublin",
                   "addressCountry": "IE"
+                },
+                "geo": {
+                  "@type": "GeoCoordinates",
+                  "latitude": 53.3498,
+                  "longitude": -6.2603
                 },
                 "brand": {
                   "@type": "Brand",

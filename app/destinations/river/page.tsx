@@ -4,16 +4,20 @@ import CruiseGrid from '@/components/cruise/CruiseGrid';
 import Link from 'next/link';
 
 export const generateMetadata = (): Metadata => {
+  const title = 'European River Cruise Holidays from Ireland 2026 | FindMyCruise.ie';
+  const description = 'A European river cruise from Ireland typically costs €1,650–€4,200 including flights. Compare best fly-cruise deals from Dublin and Cork to Amsterdam, Munich, or Lisbon.';
+  const url = 'https://www.findmycruise.ie/destinations/river';
+
   return {
-    title: 'European River Cruise Holidays from Ireland 2026 | FindMyCruise.ie',
-    description: 'A European river cruise from Ireland typically costs €1,650–€4,200 including flights. Compare best Rhine and Danube fly-cruise deals from Dublin and Cork.',
+    title,
+    description,
     alternates: {
-      canonical: '/destinations/river',
+      canonical: url,
     },
     openGraph: {
-      title: 'European River Cruise Holidays from Ireland 2026',
-      description: 'Discover the heart of Europe with river cruises from Ireland. Expert advice on Rhine, Danube, and Douro voyages with flights from Dublin.',
-      url: '/destinations/river',
+      title,
+      description,
+      url,
     }
   };
 };

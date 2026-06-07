@@ -3,16 +3,20 @@ import { MOCK_CRUISES } from '@/lib/widgety';
 import CruiseGrid from '@/components/cruise/CruiseGrid';
 
 export const generateMetadata = (): Metadata => {
+  const title = 'Caribbean Fly Cruises from Dublin & Cork 2026 | FindMyCruise.ie';
+  const description = 'A Caribbean cruise from Ireland typically costs €1,250–€3,800 including flights. Compare best fly-cruise deals from Dublin and Cork to Florida and Barbados.';
+  const url = 'https://www.findmycruise.ie/destinations/caribbean';
+
   return {
-    title: 'Caribbean Fly Cruises from Dublin & Cork 2026 | FindMyCruise.ie',
-    description: 'A Caribbean cruise from Ireland typically costs €1,250–€3,800 including flights. Compare best fly-cruise deals from Dublin and Cork to Florida and Barbados.',
+    title,
+    description,
     alternates: {
-      canonical: '/destinations/caribbean',
+      canonical: url,
     },
     openGraph: {
-      title: 'Caribbean Fly Cruises from Dublin & Cork 2026',
-      description: 'Find your perfect Caribbean cruise from Ireland. Expert advice on fly-cruises from Dublin and Cork to the Eastern, Western, and Southern Caribbean.',
-      url: '/destinations/caribbean',
+      title,
+      description,
+      url,
     }
   };
 };

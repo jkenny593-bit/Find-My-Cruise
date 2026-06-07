@@ -3,16 +3,20 @@ import { MOCK_CRUISES } from '@/lib/widgety';
 import CruiseGrid from '@/components/cruise/CruiseGrid';
 
 export const generateMetadata = (): Metadata => {
+  const title = 'Norwegian Fjords Cruises from Ireland 2026 | FindMyCruise.ie';
+  const description = 'A Norwegian Fjords cruise from Ireland typically costs €799–€2,100. Find the best fly-cruise deals from Dublin and Belfast to Bergen or Southampton.';
+  const url = 'https://www.findmycruise.ie/destinations/fjords';
+
   return {
-    title: 'Norwegian Fjords Cruises from Ireland 2026 | FindMyCruise.ie',
-    description: 'A Norwegian Fjords cruise from Ireland typically costs €799–€2,100. Find the best fly-cruise deals from Dublin and Belfast to Bergen or Southampton.',
+    title,
+    description,
     alternates: {
-      canonical: '/destinations/fjords',
+      canonical: url,
     },
     openGraph: {
-      title: 'Norwegian Fjords Cruises from Ireland 2026',
-      description: 'Discover the majesty of the Norwegian Fjords from Ireland. Expert advice on cruises from Dublin, Cork, and Belfast to Norway.',
-      url: '/destinations/fjords',
+      title,
+      description,
+      url,
     }
   };
 };

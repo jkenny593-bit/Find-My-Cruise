@@ -23,6 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/blog/luxury-vs-budget-cruise-comparison',
     '/blog/best-family-cruises-2026',
     '/blog/cruise-embarkation-day-tips',
+    '/blog/best-cruise-lines-ireland-ranked',
   ];
 
   return routes.map((route) => ({

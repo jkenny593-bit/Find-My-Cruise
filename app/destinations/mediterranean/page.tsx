@@ -7,12 +7,12 @@ export const generateMetadata = (): Metadata => {
     title: 'Mediterranean Cruise Holidays from Ireland 2026 | FindMyCruise.ie',
     description: 'Mediterranean cruises from Ireland typically cost €649–€2,450. Find the best fly-cruise deals from Dublin and Cork to Barcelona, Rome, and Venice.',
     alternates: {
-      canonical: '/destinations/mediterranean',
+      canonical: 'https://www.findmycruise.ie/destinations/mediterranean',
     },
     openGraph: {
       title: 'Mediterranean Cruise Holidays from Ireland 2026',
       description: 'Find your perfect Mediterranean cruise from Ireland. Direct flights from Dublin and Cork to top embarkation ports.',
-      url: '/destinations/mediterranean',
+      url: 'https://www.findmycruise.ie/destinations/mediterranean',
     }
   };
 };

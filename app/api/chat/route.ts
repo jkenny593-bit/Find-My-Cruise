@@ -24,7 +24,7 @@ export async function POST(req: Request) {
 
     const genAI = new GoogleGenerativeAI(apiKey);
     const model = genAI.getGenerativeModel({ 
-      model: "gemini-flash-latest",
+      model: "gemini-2.0-flash",
       systemInstruction: SYSTEM_PROMPT 
     });
 
@@ -44,24 +44,22 @@ export async function POST(req: Request) {
       else if (allText.includes('BFS') || allText.includes('BELFAST')) preferredAirport = 'BFS';
     }
 
-    // STEP 2: Always build FLIGHT_CONTEXT for the AI to have "early" access to prices
-    // We'll generate a comprehensive context block of all 15 routes for the current origin
+    // STEP 2: Build relevant FLIGHT_CONTEXT
     const regions = Object.keys(CRUISE_PORT_MAP);
     const flightContextLines = regions.map(region => {
       const price = getFlightPrice(preferredAirport, region);
-      if (price) {
-        return `${region} flights: €${price.min}–€${price.max} return from ${preferredAirport}`;
-      }
-      return null;
+      return price ? `${region} flights: €${price.min}–€${price.max} return from ${preferredAirport}` : null;
     }).filter(Boolean);
 
-    let flightContext = `\n\nFLIGHT_CONTEXT:\n${flightContextLines.join('\n')}\n\n`;
+    let flightContext = `\n\n[FLIGHT_CONTEXT from ${preferredAirport}]\n${flightContextLines.join('\n')}\n`;
 
-    // If we have final recommendations, add the specific instructions for the end-game
+    // STEP 3: Final Instructions
+    let finalInstruction = "";
     if (recommendations && recommendations.length > 0) {
-      flightContext += `INSTRUCTION: For each of the 3 cruise recommendations (Budget, Mid-range, Premium), add a 'Total Estimated Cost' line: cruise price per person + flight range per person. DO NOT use bolding or asterisks. ALWAYS end each recommendation with: 'Click to check availability and book directly with [cruise line]'. End the entire message with: 'Flight prices are indicative based on recent searches. Always check live fares before booking.'`;
+      finalInstruction = `\nINSTRUCTION: You are presenting 3 options. Mention the 'Total Estimated Cost' for each (cruise + flights). End by saying: 'Flight prices are indicative based on recent searches.'`;
     } else {
-      flightContext += `INSTRUCTION: Use the FLIGHT_CONTEXT above to provide travel tips and indicative costs during the conversation. If the user mentions a destination, tell them the flight range from ${preferredAirport} immediately. DO NOT use bolding or asterisks.`;
+      finalInstruction = `\nINSTRUCTION: If the user mentions a destination, use the FLIGHT_CONTEXT above to give them an idea of the flight costs from ${preferredAirport}. 
+      CRITICAL: If the user asks for "links", "deals", "book now", or seems ready for results, even if you are missing details, respond with 'I have found three great cruise options for you:' to trigger the cards.`;
     }
 
     // Format history for Gemini
@@ -75,11 +73,10 @@ export async function POST(req: Request) {
       parts: [{ text: m.content }],
     }));
 
-    // Add the latest message with the dynamic context
-    const latestMessage = messages[messages.length - 1].content + flightContext;
+    // Add the latest message with context
     contents.push({
       role: 'user',
-      parts: [{ text: latestMessage }]
+      parts: [{ text: messages[messages.length - 1].content + flightContext + finalInstruction }]
     });
 
     // STEP 4: Try generating content with Fallback Support

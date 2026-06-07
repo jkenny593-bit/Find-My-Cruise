@@ -3,16 +3,20 @@ import { MOCK_CRUISES } from '@/lib/widgety';
 import CruiseGrid from '@/components/cruise/CruiseGrid';
 
 export const generateMetadata = (): Metadata => {
+  const title = 'Family Cruises from Ireland 2026 | Best Deals & Ships | FindMyCruise.ie';
+  const description = 'A family cruise from Ireland typically costs €2,800–€5,500 for a family of four including flights. Find the best family fly-cruise deals from Dublin and Cork.';
+  const url = 'https://www.findmycruise.ie/destinations/family';
+
   return {
-    title: 'Family Cruises from Ireland 2026 | Best Deals & Ships | FindMyCruise.ie',
-    description: 'A family cruise from Ireland typically costs €2,800–€5,500 for a family of four including flights. Find the best family fly-cruise deals from Dublin and Cork.',
+    title,
+    description,
     alternates: {
-      canonical: '/destinations/family',
+      canonical: url,
     },
     openGraph: {
-      title: 'Family Cruises from Ireland 2026 | Best Deals & Ships',
-      description: 'Discover the best family cruise holidays from Ireland. Expert advice on kids\' clubs, family cabins, and direct flights from Dublin and Cork.',
-      url: '/destinations/family',
+      title,
+      description,
+      url,
     }
   };
 };

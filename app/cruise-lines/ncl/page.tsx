@@ -7,12 +7,12 @@ export const generateMetadata = (): Metadata => {
     title: 'Norwegian Cruise Line (NCL) Ireland — Deals & Reviews | FindMyCruise.ie',
     description: 'NCL offers "Free at Sea" fly-cruises from Dublin, typically costing €950–€2,400 per person. Perfect for flexible dining and baby-friendly family travel.',
     alternates: {
-      canonical: '/cruise-lines/ncl',
+      canonical: 'https://www.findmycruise.ie/cruise-lines/ncl',
     },
     openGraph: {
       title: 'Norwegian Cruise Line (NCL) Ireland — Deals & Reviews',
       description: 'Find the best NCL deals from Ireland. Expert advice on "Free at Sea" packages, flexible dining, and family-friendly Guppies programs.',
-      url: '/cruise-lines/ncl',
+      url: 'https://www.findmycruise.ie/cruise-lines/ncl',
     }
   };
 };

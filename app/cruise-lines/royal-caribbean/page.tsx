@@ -3,16 +3,20 @@ import { MOCK_CRUISES } from '@/lib/widgety';
 import CruiseGrid from '@/components/cruise/CruiseGrid';
 
 export const generateMetadata = (): Metadata => {
+  const title = 'Royal Caribbean Cruises from Ireland — Prices & Itineraries | FindMyCruise.ie';
+  const description = 'Royal Caribbean offers fly-cruises from Dublin to the Mediterranean and Caribbean. Prices typically range from €850 to €2,900 per person. Find the best Irish deals here.';
+  const url = 'https://www.findmycruise.ie/cruise-lines/royal-caribbean';
+
   return {
-    title: 'Royal Caribbean Cruises from Ireland — Prices & Itineraries | FindMyCruise.ie',
-    description: 'Royal Caribbean offers fly-cruises from Dublin to the Mediterranean and Caribbean. Prices typically range from €850 to €2,900 per person. Find the best Irish deals here.',
+    title,
+    description,
     alternates: {
-      canonical: '/cruise-lines/royal-caribbean',
+      canonical: url,
     },
     openGraph: {
-      title: 'Royal Caribbean Cruises from Ireland — Prices & Itineraries',
-      description: 'Find the best Royal Caribbean deals from Ireland. Expert advice on ships, pricing, and direct flights from Dublin Airport.',
-      url: '/cruise-lines/royal-caribbean',
+      title,
+      description,
+      url,
     }
   };
 };
